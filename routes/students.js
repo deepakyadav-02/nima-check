@@ -50,6 +50,7 @@ router.get('/admit-card', async (req, res) => {
       rollNo: student["Roll No"] || student["College Roll No"],
       department: student["Department"] || student["Course"],
       dob: student["dob"] || student["DOB"],
+      ABC_ID: student.ABC_ID || null,
       ...student.toObject()
     };
 
@@ -94,7 +95,11 @@ router.get('/profile', auth, async (req, res) => {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    res.json(student);
+    // Add ABC_ID to response
+    const studentData = student.toObject();
+    studentData.ABC_ID = student.ABC_ID || null;
+
+    res.json(studentData);
 
   } catch (error) {
     console.error(error.message);
@@ -141,7 +146,8 @@ router.get('/search', async (req, res) => {
 
     res.json({
       studentType,
-      student: result
+      student: result,
+      ABC_ID: result.ABC_ID || null
     });
 
   } catch (error) {

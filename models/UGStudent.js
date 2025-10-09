@@ -48,6 +48,11 @@ const UGStudentSchema = new mongoose.Schema({
   dob: {
     type: String,
     required: false
+  },
+  ABC_ID: {
+    type: String,
+    required: false,
+    default: null
   }
 }, {
   timestamps: false

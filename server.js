@@ -21,6 +21,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/students', require('./routes/students'));
 app.use('/api/data-import', require('./routes/dataImport'));
 app.use('/api/marksheet', require('./routes/marksheet'));
+app.use('/api/abc-id', require('./routes/abcId'));
 
 // Health check route
 app.get('/health', (req, res) => {
@@ -40,7 +41,8 @@ app.get('/', (req, res) => {
       auth: '/api/auth',
       students: '/api/students',
       dataImport: '/api/data-import',
-      marksheet: '/api/marksheet'
+      marksheet: '/api/marksheet',
+      abcId: '/api/abc-id'
     }
   });
 });

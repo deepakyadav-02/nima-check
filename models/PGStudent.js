@@ -28,6 +28,11 @@ const PGStudentSchema = new mongoose.Schema({
   "Graduation Board": {
     type: String,
     required: false
+  },
+  ABC_ID: {
+    type: String,
+    required: false,
+    default: null
   }
 }, {
   timestamps: false
