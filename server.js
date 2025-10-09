@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/students', require('./routes/students'));
 app.use('/api/data-import', require('./routes/dataImport'));
+app.use('/api/marksheet', require('./routes/marksheet'));
 
 // Health check route
 app.get('/health', (req, res) => {
@@ -38,7 +39,8 @@ app.get('/', (req, res) => {
     endpoints: {
       auth: '/api/auth',
       students: '/api/students',
-      dataImport: '/api/data-import'
+      dataImport: '/api/data-import',
+      marksheet: '/api/marksheet'
     }
   });
 });
