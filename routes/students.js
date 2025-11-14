@@ -156,4 +156,101 @@ router.get('/search', async (req, res) => {
   }
 });
 
+// @route   POST /api/students/bulk-update-dob
+// @desc    Bulk update student DOB using College Roll No
+// @access  Public (consider securing this endpoint before production use)
+router.post('/bulk-update-dob', async (req, res) => {
+  try {
+    const payload = Array.isArray(req.body) ? req.body : req.body?.students;
+
+    if (!Array.isArray(payload) || payload.length === 0) {
+      return res.status(400).json({
+        message: 'Request body must be an array of student records or an object with a students array'
+      });
+    }
+
+    const summary = {
+      total: payload.length,
+      updated: 0,
+      modifiedDocs: 0,
+      notFound: [],
+      skipped: [],
+      errors: []
+    };
+
+    for (const entry of payload) {
+      try {
+        const rollNo =
+          entry?.CollegeRollNo ||
+          entry?.['College Roll No'] ||
+          entry?.RollNo ||
+          entry?.['Roll No'];
+
+        const dob =
+          entry?.DateOfBirth ||
+          entry?.['DateOfBirth'] ||
+          entry?.DOB ||
+          entry?.['DOB'];
+
+        if (!rollNo || !dob) {
+          summary.skipped.push({
+            entry,
+            reason: 'Missing CollegeRollNo/RollNo or DateOfBirth/DOB'
+          });
+          continue;
+        }
+
+        const updates = [
+          {
+            model: PGStudent,
+            query: { 'College Roll No': rollNo },
+            update: { $set: { DOB: dob } }
+          },
+          {
+            model: UGStudent,
+            query: { 'Roll No': rollNo },
+            update: { $set: { dob } }
+          },
+          {
+            model: BBAStudent,
+            query: { 'Roll No': rollNo },
+            update: { $set: { dob } }
+          }
+        ];
+
+        let matched = 0;
+        let modified = 0;
+
+        for (const { model, query, update } of updates) {
+          const result = await model.updateOne(query, update);
+          matched += result.matchedCount || 0;
+          modified += result.modifiedCount || 0;
+        }
+
+        if (matched === 0) {
+          summary.notFound.push({ rollNo, dob });
+          continue;
+        }
+
+        summary.updated += matched;
+        summary.modifiedDocs += modified;
+      } catch (innerError) {
+        console.error(`Failed to process entry`, innerError);
+        summary.errors.push({
+          entry,
+          error: innerError.message || 'Unknown error'
+        });
+      }
+    }
+
+    res.json({
+      message: 'Bulk DOB update completed',
+      summary
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
