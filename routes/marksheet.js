@@ -269,25 +269,89 @@ router.get('/student/:studentId', async (req, res) => {
 // @access  Public
 router.get('/autonomous/:autonomousRollNo', async (req, res) => {
   try {
-    // Search in all three collections
-    let student = await UGStudent.findOne({ 
-      "Autonomous Roll No": req.params.autonomousRollNo 
-    });
-    let studentType = 'UGStudent';
+    const autonomousRollNo = req.params.autonomousRollNo;
     
-    if (!student) {
-      student = await PGStudent.findOne({ 
-        "Autonomous Roll No": req.params.autonomousRollNo 
-      });
-      if (student) {
-        studentType = 'PGStudent';
-      } else {
-        student = await BBAStudent.findOne({ 
-          "Autonomous Roll No": req.params.autonomousRollNo 
-        });
-        if (student) {
-          studentType = 'BBAStudent';
+    // Search in all three collections - find ALL students with this roll number
+    const ugStudents = await UGStudent.find({ 
+      "Autonomous Roll No": autonomousRollNo 
+    });
+    const pgStudents = await PGStudent.find({ 
+      "Autonomous Roll No": autonomousRollNo 
+    });
+    const bbaStudents = await BBAStudent.find({ 
+      "Autonomous Roll No": autonomousRollNo 
+    });
+
+    // Collect all student IDs from all collections
+    const allUGIds = ugStudents.map(s => s._id);
+    const allPGIds = pgStudents.map(s => s._id);
+    const allBBAIds = bbaStudents.map(s => s._id);
+    const allStudentIds = [...allUGIds, ...allPGIds, ...allBBAIds];
+
+    if (allStudentIds.length === 0) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // First, try to find marksheets to determine which student type has marksheets
+    // Check all possible student types
+    let marksheets = null;
+    let studentType = null;
+    let student = null;
+
+    // Check BBAStudent first (since BBA students might be in both collections)
+    if (allBBAIds.length > 0) {
+      marksheets = await UGMarksheet.find({ 
+        student: { $in: allBBAIds },
+        studentType: 'BBAStudent'
+      }).sort({ semester: 1 });
+      
+      if (marksheets && marksheets.length > 0) {
+        studentType = 'BBAStudent';
+        student = bbaStudents[0];
+      }
+    }
+
+    // Check PGStudent
+    if (!marksheets || marksheets.length === 0) {
+      if (allPGIds.length > 0) {
+        marksheets = await UGMarksheet.find({ 
+          student: { $in: allPGIds },
+          studentType: 'PGStudent'
+        }).sort({ semester: 1 });
+        
+        if (marksheets && marksheets.length > 0) {
+          studentType = 'PGStudent';
+          student = pgStudents[0];
         }
+      }
+    }
+
+    // Check UGStudent last
+    if (!marksheets || marksheets.length === 0) {
+      if (allUGIds.length > 0) {
+        marksheets = await UGMarksheet.find({ 
+          student: { $in: allUGIds },
+          studentType: 'UGStudent'
+        }).sort({ semester: 1 });
+        
+        if (marksheets && marksheets.length > 0) {
+          studentType = 'UGStudent';
+          student = ugStudents[0];
+        }
+      }
+    }
+
+    // If no marksheets found, determine student type from which collection has the student
+    if (!marksheets || marksheets.length === 0) {
+      if (bbaStudents.length > 0) {
+        studentType = 'BBAStudent';
+        student = bbaStudents[0];
+      } else if (pgStudents.length > 0) {
+        studentType = 'PGStudent';
+        student = pgStudents[0];
+      } else if (ugStudents.length > 0) {
+        studentType = 'UGStudent';
+        student = ugStudents[0];
       }
     }
 
@@ -295,15 +359,18 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    const marksheets = await UGMarksheet.find({ 
-      student: student._id,
-      studentType: studentType
-    })
-    .populate({
-      path: 'student',
-      select: 'Autonomous Roll No "Name of the Students" Applicant Name Department "Roll No"'
-    })
-    .sort({ semester: 1 });
+    // If marksheets were found, populate them
+    if (marksheets && marksheets.length > 0) {
+      marksheets = await UGMarksheet.find({ 
+        student: { $in: studentType === 'BBAStudent' ? allBBAIds : studentType === 'PGStudent' ? allPGIds : allUGIds },
+        studentType: studentType
+      })
+      .populate({
+        path: 'student',
+        select: 'Autonomous Roll No "Name of the Students" Applicant Name Department "Roll No" "College Roll No"'
+      })
+      .sort({ semester: 1 });
+    }
 
     if (!marksheets || marksheets.length === 0) {
       const studentName = student["Name of the Students"] || student["Applicant Name"] || 'N/A';
@@ -317,14 +384,32 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
         }
       });
     }
+
+    // Get the student ID from the first marksheet to fetch the correct student record
+    const marksheetStudentId = marksheets[0].student?._id || marksheets[0].student || student._id;
     
-    const studentName = student["Name of the Students"] || student["Applicant Name"] || 'N/A';
+    // Fetch the student record directly to ensure we have all fields
+    let marksheetStudent = student;
+    if (marksheetStudentId && marksheetStudentId.toString() !== student._id.toString()) {
+      if (studentType === 'UGStudent') {
+        marksheetStudent = await UGStudent.findById(marksheetStudentId);
+      } else if (studentType === 'PGStudent') {
+        marksheetStudent = await PGStudent.findById(marksheetStudentId);
+      } else if (studentType === 'BBAStudent') {
+        marksheetStudent = await BBAStudent.findById(marksheetStudentId);
+      }
+      if (!marksheetStudent) {
+        marksheetStudent = student; // Fallback to original student
+      }
+    }
+    
+    const studentName = marksheetStudent["Name of the Students"] || marksheetStudent["Applicant Name"] || 'N/A';
     res.json({
       student: {
         name: studentName,
-        autonomousRollNo: student["Autonomous Roll No"],
-        rollNo: student["Roll No"] || student["College Roll No"] || 'N/A',
-        department: student.Department,
+        autonomousRollNo: marksheetStudent["Autonomous Roll No"] || autonomousRollNo,
+        rollNo: marksheetStudent["Roll No"] || marksheetStudent["College Roll No"] || 'N/A',
+        department: marksheetStudent.Department || 'N/A',
         studentType: studentType
       },
       marksheets
