@@ -196,6 +196,94 @@ The API includes comprehensive error handling:
 4. Set up proper CORS origins
 5. Use environment variables for sensitive data
 
+## Workflow Report
+
+### Performance Optimization Tasks
+
+- Optimize backend API route to use parallel queries instead of sequential
+- Add database indexes for frequently queried fields
+- Implement response caching on backend
+- Add frontend caching to avoid redundant API calls
+
+### PG Marksheet JSON Structure Changes
+
+The `pgMark_sheet.json` file was restructured to improve data clarity and consistency:
+
+#### Key Changes Made:
+
+1. **Full Subject Names Instead of Subject Codes**
+   - **Before:** Used short subject codes (e.g., "SUB101", "SUB102")
+   - **After:** Uses complete descriptive subject names (e.g., "PURANA O PRACHINA KABYA KABITA", "ADHUNIKA KABYA KABITA-I")
+   - **Benefit:** More readable and self-explanatory, eliminates need for code-to-name mapping
+
+2. **Course Type Instead of Subject Code**
+   - **Before:** Used `subjectCode` field
+   - **After:** Uses `courseType` field with descriptive identifiers
+   - **Format:** 
+     - For Odia department: `PAPER1.1`, `PAPER1.2`, `PAPER1.3`, `PAPER1.4`
+     - For other departments: Course codes like `MTC101`, `CHEM201`, etc.
+   - **Benefit:** Clearer identification of course types and better organization
+
+3. **PG-Specific Mark Fields**
+   - **Replaced:** UG format fields (`theory`, `internal`)
+   - **With:** PG format fields (`midsem`, `endsem`)
+   - **Additional:** Includes `practical` field when applicable
+   - **Benefit:** Accurate representation of PG examination structure
+
+4. **Pre-Calculated Summary Values**
+   - Includes calculated fields at marksheet level:
+     - `totalCredits`: Sum of all course credits
+     - `totalCreditPoints`: Sum of all credit points
+     - `sgpa`: Semester Grade Point Average
+     - `percentage`: Overall percentage
+     - `classification`: Result classification (e.g., "Very Good", "Good", "Pass")
+   - **Benefit:** Reduces computation time and ensures consistency
+
+5. **Department Information**
+   - Added `department` field at marksheet level (e.g., "ODIA", "CHEMISTRY", "MATHEMATICS")
+   - Added `stream` field for categorization (e.g., "ARTS", "SCIENCE")
+   - **Benefit:** Easy filtering and organization by department
+
+#### Example Structure:
+
+```json
+{
+  "CollegeRollNo": "ODIA24-001",
+  "AutonomousRollNo": "111NAC24001",
+  "Name": "BARSA NAYAK",
+  "semester": 1,
+  "courses": [
+    {
+      "subjectName": "PURANA O PRACHINA KABYA KABITA",
+      "courseType": "PAPER1.1",
+      "credit": 4,
+      "midsem": 23,
+      "endsem": 50,
+      "marks": 73,
+      "grade": "A",
+      "gradePoint": 8,
+      "creditPoint": 32,
+      "percentage": 73
+    }
+  ],
+  "totalCredits": 16,
+  "totalCreditPoints": 128,
+  "sgpa": 8,
+  "percentage": 75,
+  "classification": "Very Good",
+  "department": "ODIA",
+  "stream": "ARTS"
+}
+```
+
+#### Benefits of These Changes:
+
+- ✅ **Better Readability:** Full subject names are self-explanatory
+- ✅ **No Code Mapping:** Eliminates need for subject code lookup tables
+- ✅ **Accurate Representation:** PG-specific fields match actual examination structure
+- ✅ **Performance:** Pre-calculated values reduce computation overhead
+- ✅ **Consistency:** Standardized structure across all PG departments
+
 ## Support
 
 For any issues or questions, please check the API documentation or contact the development team.

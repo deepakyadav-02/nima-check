@@ -24,22 +24,29 @@ const connectDB = async () => {
   }
 };
 
-// Upload marksheets from final.json
+// Upload marksheets from final.json or pgMark_sheet.json
 const uploadMarksheets = async () => {
   try {
     await connectDB();
 
-    // Read final.json
-    const finalJsonPath = path.join(__dirname, '../final.json');
-    console.log('Reading final.json from:', finalJsonPath);
+    // Read final.json or pgMark_sheet.json
+    const args = process.argv.slice(2);
+    const fileArg = args.find(arg => arg.startsWith('--file='))?.split('=')[1] || 
+                    (args.indexOf('--file') !== -1 ? args[args.indexOf('--file') + 1] : null);
+    
+    const defaultFile = fileArg || path.join(__dirname, '../final.json');
+    const finalJsonPath = path.resolve(defaultFile);
+    
+    console.log('Reading marksheet file from:', finalJsonPath);
     
     if (!fs.existsSync(finalJsonPath)) {
-      console.error('Error: final.json not found at', finalJsonPath);
+      console.error('Error: File not found at', finalJsonPath);
+      console.error('Usage: node uploadFinalJson.js [--file=path/to/file.json]');
       process.exit(1);
     }
 
     const finalData = JSON.parse(fs.readFileSync(finalJsonPath, 'utf8'));
-    console.log(`\nTotal records in final.json: ${finalData.length}`);
+    console.log(`\nTotal records in file: ${finalData.length}`);
 
     // Delete all existing marksheets
     console.log('\nDeleting all existing marksheets...');
@@ -58,8 +65,10 @@ const uploadMarksheets = async () => {
       const marksheetData = finalData[i];
       
       try {
-        // Validate required fields
-        const rollNo = marksheetData.AutonomousRollNo || marksheetData.autonomousRollNo;
+        // Validate required fields - support multiple formats
+        const rollNo = marksheetData.AutonomousRollNo || 
+                      marksheetData.autonomousRollNo || 
+                      marksheetData['Autonomous Roll No'];
         
         if (!rollNo) {
           results.failed.push({
@@ -123,21 +132,29 @@ const uploadMarksheets = async () => {
           continue;
         }
 
-        // Normalize courses
+        // Normalize courses - support both UG and PG formats
         const processedCourses = marksheetData.courses.map((course) => {
           const normalized = {
             subjectName: course.subjectName,
-            courseType: course.courseType,
+            courseType: course.courseType, // Preserve PG course types (PAPER1.1, etc.)
             credit: course.credit,
             marks: course.marks
           };
 
+          // UG format fields
           if (course.theory !== undefined) normalized.theory = course.theory;
           if (course.internal !== undefined) normalized.internal = course.internal;
+          
+          // PG format fields
+          if (course.midsem !== undefined) normalized.midsem = course.midsem;
+          if (course.endsem !== undefined) normalized.endsem = course.endsem;
+          
+          // Common fields
           if (course.practical !== undefined) normalized.practical = course.practical;
           if (course.grade !== undefined) normalized.grade = course.grade;
           if (course.gradePoint !== undefined) normalized.gradePoint = course.gradePoint;
           if (course.creditPoint !== undefined) normalized.creditPoint = course.creditPoint;
+          if (course.percentage !== undefined) normalized.percentage = course.percentage;
 
           return normalized;
         });

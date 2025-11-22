@@ -105,8 +105,15 @@ const normalizeCourseType = (value) => {
   if (!value) return 'Other';
 
   const raw = value.toString().trim();
+  const upper = raw.toUpperCase();
   const lower = raw.toLowerCase();
 
+  // Handle PG course types (PAPER1.1, PAPER1.2, etc.) - preserve as-is
+  if (upper.startsWith('PAPER')) {
+    return raw; // Keep original format for PG papers
+  }
+
+  // Handle UG course types
   if (lower.includes('major') && lower.includes('cp-1')) return 'Major-cp-1';
   if (lower.includes('major') && lower.includes('cp-2')) return 'Major-cp-2';
   if (lower.startsWith('minor')) return 'Minor';
@@ -127,20 +134,25 @@ const normalizeCourse = (course) => {
     credit: course.credit
   };
 
+  // Support both UG and PG formats
   if (course.theory !== undefined) normalized.theory = course.theory;
   if (course.internal !== undefined) normalized.internal = course.internal;
+  if (course.midsem !== undefined) normalized.midsem = course.midsem; // PG format
+  if (course.endsem !== undefined) normalized.endsem = course.endsem; // PG format
   if (course.practical !== undefined) normalized.practical = course.practical;
   if (course.marks !== undefined) normalized.marks = course.marks;
   if (course.grade !== undefined) normalized.grade = course.grade;
   if (course.gradePoint !== undefined) normalized.gradePoint = course.gradePoint;
   if (course.creditPoint !== undefined) normalized.creditPoint = course.creditPoint;
+  if (course.percentage !== undefined) normalized.percentage = course.percentage;
   if (course._id) normalized._id = course._id;
 
   return normalized;
 };
 
 const mapToPayload = (entries) => entries.map((entry) => ({
-  autonomousRollNo: entry.autonomousRollNo,
+  // Support both formats: autonomousRollNo (lowercase) or AutonomousRollNo (camelCase from pgMark_sheet.json)
+  autonomousRollNo: entry.autonomousRollNo || entry.AutonomousRollNo,
   studentId: entry.studentId,
   semester: entry.semester,
   courses: Array.isArray(entry.courses) ? entry.courses.map(normalizeCourse) : [],
