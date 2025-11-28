@@ -33,6 +33,11 @@ const PGStudentSchema = new mongoose.Schema({
     type: String,
     required: false,
     default: null
+  },
+  profileImage: {
+    type: String,
+    required: false,
+    default: null
   }
 }, {
   timestamps: false

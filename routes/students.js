@@ -51,6 +51,7 @@ router.get('/admit-card', async (req, res) => {
       department: student["Department"] || student["Course"],
       dob: student["dob"] || student["DOB"],
       ABC_ID: student.ABC_ID || null,
+      profileImage: student.profileImage || null,
       ...student.toObject()
     };
 
@@ -67,7 +68,21 @@ router.get('/admit-card', async (req, res) => {
 // @access  Private
 router.get('/profile', auth, async (req, res) => {
   try {
+    console.log('Profile route - req.user:', req.user);
+    
+    if (!req.user) {
+      return res.status(401).json({ message: 'User not found in token' });
+    }
+    
     const { autonomousRollNo, studentType } = req.user;
+    
+    if (!autonomousRollNo || !studentType) {
+      console.error('Missing required fields:', { autonomousRollNo, studentType });
+      return res.status(400).json({ 
+        message: 'Invalid token data',
+        received: { autonomousRollNo, studentType }
+      });
+    }
 
     let student;
     
@@ -95,9 +110,10 @@ router.get('/profile', auth, async (req, res) => {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    // Add ABC_ID to response
+    // Add ABC_ID and profileImage to response
     const studentData = student.toObject();
     studentData.ABC_ID = student.ABC_ID || null;
+    studentData.profileImage = student.profileImage || null;
 
     res.json(studentData);
 
@@ -249,6 +265,139 @@ router.post('/bulk-update-dob', async (req, res) => {
     });
   } catch (error) {
     console.error(error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/students/test-upload-route
+// @desc    Test route to verify upload-image route exists
+// @access  Public
+router.get('/test-upload-route', (req, res) => {
+  res.json({ message: 'Upload route is accessible', path: '/api/students/upload-image' });
+});
+
+// @route   POST /api/students/upload-image
+// @desc    Upload/update student profile image
+// @access  Private
+router.post('/upload-image', auth, async (req, res) => {
+  console.log('Upload image route hit', { 
+    user: req.user,
+    bodyKeys: Object.keys(req.body),
+    hasImage: !!req.body.image 
+  }); // Debug log
+  
+  try {
+    const { autonomousRollNo, studentType } = req.user;
+    const { image } = req.body; // Base64 encoded image string
+
+    if (!image) {
+      console.log('No image provided in request body');
+      return res.status(400).json({ message: 'Image data is required' });
+    }
+
+    if (!image.startsWith('data:image/')) {
+      console.log('Invalid image format:', image.substring(0, 50));
+      return res.status(400).json({ message: 'Invalid image data. Please provide a valid base64 image.' });
+    }
+
+    let student;
+    
+    switch (studentType) {
+      case 'UG':
+        student = await UGStudent.findOne({ 
+          "Autonomous Roll No": autonomousRollNo 
+        });
+        if (student) {
+          student.profileImage = image;
+          await student.save();
+        }
+        break;
+      case 'PG':
+        student = await PGStudent.findOne({ 
+          "Autonomous Roll No": autonomousRollNo 
+        });
+        if (student) {
+          student.profileImage = image;
+          await student.save();
+        }
+        break;
+      case 'BBA':
+        student = await BBAStudent.findOne({ 
+          "Autonomous Roll No": autonomousRollNo 
+        });
+        if (student) {
+          student.profileImage = image;
+          await student.save();
+        }
+        break;
+      default:
+        return res.status(400).json({ message: 'Invalid student type' });
+    }
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    res.json({ 
+      message: 'Profile image uploaded successfully',
+      profileImage: student.profileImage 
+    });
+
+  } catch (error) {
+    console.error('Error uploading image:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   DELETE /api/students/delete-image
+// @desc    Delete student profile image
+// @access  Private
+router.delete('/delete-image', auth, async (req, res) => {
+  try {
+    const { autonomousRollNo, studentType } = req.user;
+
+    let student;
+    
+    switch (studentType) {
+      case 'UG':
+        student = await UGStudent.findOne({ 
+          "Autonomous Roll No": autonomousRollNo 
+        });
+        if (student) {
+          student.profileImage = null;
+          await student.save();
+        }
+        break;
+      case 'PG':
+        student = await PGStudent.findOne({ 
+          "Autonomous Roll No": autonomousRollNo 
+        });
+        if (student) {
+          student.profileImage = null;
+          await student.save();
+        }
+        break;
+      case 'BBA':
+        student = await BBAStudent.findOne({ 
+          "Autonomous Roll No": autonomousRollNo 
+        });
+        if (student) {
+          student.profileImage = null;
+          await student.save();
+        }
+        break;
+      default:
+        return res.status(400).json({ message: 'Invalid student type' });
+    }
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    res.json({ message: 'Profile image deleted successfully' });
+
+  } catch (error) {
+    console.error('Error deleting image:', error.message);
     res.status(500).json({ message: 'Server error' });
   }
 });

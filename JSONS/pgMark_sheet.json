@@ -2590,19 +2590,19 @@
         "credit": 3,
         "midsem": 29,
         "practical": 0,
-        "endsem": 0,
-        "marks": 29,
-        "grade": "F",
-        "gradePoint": 0,
-        "creditPoint": 0,
-        "percentage": 29
+        "endsem": 67,
+        "marks": 96,
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 30,
+        "percentage": 96
       }
     ],
     "totalCredits": 19,
-    "totalCreditPoints": 124,
-    "sgpa": 6.53,
-    "percentage": 60.26,
-    "classification": "Fail",
+    "totalCreditPoints": 154,
+    "sgpa": 8.11,
+    "percentage": 76.1,
+    "classification": "Very Good",
     "department": "MATH",
     "stream": "SCIENCE"
   },
@@ -4710,10 +4710,10 @@
         "practical": 0,
         "endsem": 33,
         "marks": 51,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 51
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 72.86
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -4723,10 +4723,10 @@
         "practical": 0,
         "endsem": 33,
         "marks": 51,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 51
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 72.86
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -4736,10 +4736,10 @@
         "practical": 0,
         "endsem": 31,
         "marks": 49,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 49
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 70
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -4749,10 +4749,10 @@
         "practical": 47,
         "endsem": 0,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 47
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 94
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -4762,10 +4762,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -4775,10 +4775,10 @@
         "practical": 0,
         "endsem": 35,
         "marks": 53,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 53
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 75.71
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -4788,17 +4788,17 @@
         "practical": 0,
         "endsem": 38,
         "marks": 58,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 58
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 82.86
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 127,
-    "sgpa": 5.52,
-    "percentage": 50.22,
-    "classification": "Above Average",
+    "totalCreditPoints": 203,
+    "sgpa": 8.83,
+    "percentage": 83.26,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -4817,10 +4817,10 @@
         "practical": 0,
         "endsem": 37,
         "marks": 55,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 55
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 78.57
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -4830,10 +4830,10 @@
         "practical": 0,
         "endsem": 35,
         "marks": 54,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 54
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 77.14
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -4843,10 +4843,10 @@
         "practical": 0,
         "endsem": 41,
         "marks": 58,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 58
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 82.86
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -4856,10 +4856,10 @@
         "practical": 47,
         "endsem": 0,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 47
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 94
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -4869,10 +4869,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -4882,10 +4882,10 @@
         "practical": 0,
         "endsem": 37,
         "marks": 55,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 55
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 78.57
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -4895,17 +4895,17 @@
         "practical": 0,
         "endsem": 37,
         "marks": 56,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 56
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 80
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 130,
-    "sgpa": 5.65,
-    "percentage": 51.52,
-    "classification": "Above Average",
+    "totalCreditPoints": 206,
+    "sgpa": 8.96,
+    "percentage": 84.57,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -4924,10 +4924,10 @@
         "practical": 0,
         "endsem": 39,
         "marks": 58,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 58
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 82.86
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -4937,10 +4937,10 @@
         "practical": 0,
         "endsem": 32,
         "marks": 51,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 51
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 72.86
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -4950,10 +4950,10 @@
         "practical": 0,
         "endsem": 38,
         "marks": 55,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 55
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 78.57
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -4963,10 +4963,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -4976,10 +4976,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -4989,10 +4989,10 @@
         "practical": 0,
         "endsem": 38,
         "marks": 55,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 55
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 78.57
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5002,17 +5002,17 @@
         "practical": 0,
         "endsem": 41,
         "marks": 59,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 59
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 84.29
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 130,
-    "sgpa": 5.65,
-    "percentage": 51.52,
-    "classification": "Above Average",
+    "totalCreditPoints": 206,
+    "sgpa": 8.96,
+    "percentage": 84.57,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5138,10 +5138,10 @@
         "practical": 0,
         "endsem": 32,
         "marks": 50,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 50
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 71.43
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -5151,10 +5151,10 @@
         "practical": 0,
         "endsem": 31,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 47
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 67.14
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -5164,10 +5164,10 @@
         "practical": 0,
         "endsem": 37,
         "marks": 55,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 55
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 78.57
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -5177,10 +5177,10 @@
         "practical": 46,
         "endsem": 0,
         "marks": 46,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 46
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 92
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -5190,10 +5190,10 @@
         "practical": 47,
         "endsem": 0,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 47
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 94
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -5203,10 +5203,10 @@
         "practical": 0,
         "endsem": 34,
         "marks": 53,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 53
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 75.71
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5216,17 +5216,17 @@
         "practical": 0,
         "endsem": 36,
         "marks": 52,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 52
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 74.29
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 127,
-    "sgpa": 5.52,
-    "percentage": 50.22,
-    "classification": "Above Average",
+    "totalCreditPoints": 197,
+    "sgpa": 8.57,
+    "percentage": 80.65,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5245,10 +5245,10 @@
         "practical": 0,
         "endsem": 25,
         "marks": 44,
-        "grade": "D",
-        "gradePoint": 4,
-        "creditPoint": 12,
-        "percentage": 44
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 62.86
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -5257,11 +5257,11 @@
         "midsem": 15,
         "practical": 0,
         "endsem": 23,
-        "marks": 40,
-        "grade": "D",
-        "gradePoint": 4,
-        "creditPoint": 12,
-        "percentage": 40
+        "marks": 38,
+        "grade": "B",
+        "gradePoint": 6,
+        "creditPoint": 18,
+        "percentage": 54.29
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -5270,11 +5270,11 @@
         "midsem": 18,
         "practical": 0,
         "endsem": 18,
-        "marks": 40,
-        "grade": "D",
-        "gradePoint": 4,
-        "creditPoint": 12,
-        "percentage": 40
+        "marks": 36,
+        "grade": "B",
+        "gradePoint": 6,
+        "creditPoint": 18,
+        "percentage": 51.43
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -5284,10 +5284,10 @@
         "practical": 46,
         "endsem": 0,
         "marks": 46,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 46
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 92
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -5297,10 +5297,10 @@
         "practical": 46,
         "endsem": 0,
         "marks": 46,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 46
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 92
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -5310,10 +5310,10 @@
         "practical": 0,
         "endsem": 29,
         "marks": 49,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 49
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 70
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5323,17 +5323,17 @@
         "practical": 0,
         "endsem": 19,
         "marks": 37,
-        "grade": "F",
-        "gradePoint": 0,
-        "creditPoint": 0,
-        "percentage": 37
+        "grade": "B",
+        "gradePoint": 6,
+        "creditPoint": 18,
+        "percentage": 52.86
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 91,
-    "sgpa": 3.96,
-    "percentage": 39.57,
-    "classification": "Fail",
+    "totalCreditPoints": 179,
+    "sgpa": 7.78,
+    "percentage": 72.83,
+    "classification": "Very Good",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5352,10 +5352,10 @@
         "practical": 0,
         "endsem": 37,
         "marks": 56,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 56
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 80
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -5365,10 +5365,10 @@
         "practical": 0,
         "endsem": 32,
         "marks": 51,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 51
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 72.86
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -5378,10 +5378,10 @@
         "practical": 0,
         "endsem": 40,
         "marks": 57,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 57
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 81.43
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -5391,10 +5391,10 @@
         "practical": 46,
         "endsem": 0,
         "marks": 46,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 46
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 92
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -5404,10 +5404,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -5417,10 +5417,10 @@
         "practical": 0,
         "endsem": 41,
         "marks": 60,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 60
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 85.71
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5430,17 +5430,17 @@
         "practical": 0,
         "endsem": 42,
         "marks": 62,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 62
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 88.57
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 136,
-    "sgpa": 5.91,
-    "percentage": 54.13,
-    "classification": "Above Average",
+    "totalCreditPoints": 212,
+    "sgpa": 9.22,
+    "percentage": 87.17,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5459,10 +5459,10 @@
         "practical": 0,
         "endsem": 35,
         "marks": 53,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 53
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 75.71
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -5472,10 +5472,10 @@
         "practical": 0,
         "endsem": 40,
         "marks": 59,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 59
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 84.29
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -5485,10 +5485,10 @@
         "practical": 0,
         "endsem": 29,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 47
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 67.14
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -5498,10 +5498,10 @@
         "practical": 46,
         "endsem": 0,
         "marks": 46,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 46
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 92
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -5511,10 +5511,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -5524,10 +5524,10 @@
         "practical": 0,
         "endsem": 32,
         "marks": 50,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 50
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 71.43
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5537,17 +5537,17 @@
         "practical": 0,
         "endsem": 39,
         "marks": 58,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 58
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 82.86
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 127,
-    "sgpa": 5.52,
-    "percentage": 50.22,
-    "classification": "Above Average",
+    "totalCreditPoints": 203,
+    "sgpa": 8.83,
+    "percentage": 83.26,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5566,10 +5566,10 @@
         "practical": 0,
         "endsem": 34,
         "marks": 54,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 54
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 77.14
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -5579,10 +5579,10 @@
         "practical": 0,
         "endsem": 40,
         "marks": 60,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 60
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 85.71
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -5592,10 +5592,10 @@
         "practical": 0,
         "endsem": 41,
         "marks": 60,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 60
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 85.71
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -5605,10 +5605,10 @@
         "practical": 47,
         "endsem": 0,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 47
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 94
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -5618,10 +5618,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -5631,10 +5631,10 @@
         "practical": 0,
         "endsem": 42,
         "marks": 62,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 62
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 88.57
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5644,17 +5644,17 @@
         "practical": 0,
         "endsem": 46,
         "marks": 66,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 66
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 30,
+        "percentage": 94.29
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 142,
-    "sgpa": 6.17,
-    "percentage": 56.74,
-    "classification": "Above Average",
+    "totalCreditPoints": 215,
+    "sgpa": 9.35,
+    "percentage": 88.48,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5672,11 +5672,11 @@
         "midsem": 12,
         "practical": 0,
         "endsem": 15,
-        "marks": 27,
-        "grade": "F",
-        "gradePoint": 0,
-        "creditPoint": 0,
-        "percentage": 27
+        "marks": 28,
+        "grade": "D",
+        "gradePoint": 4,
+        "creditPoint": 12,
+        "percentage": 40
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -5686,10 +5686,10 @@
         "practical": 0,
         "endsem": 16,
         "marks": 28,
-        "grade": "F",
-        "gradePoint": 0,
-        "creditPoint": 0,
-        "percentage": 28
+        "grade": "D",
+        "gradePoint": 4,
+        "creditPoint": 12,
+        "percentage": 40
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -5699,10 +5699,10 @@
         "practical": 0,
         "endsem": 15,
         "marks": 30,
-        "grade": "F",
-        "gradePoint": 0,
-        "creditPoint": 0,
-        "percentage": 30
+        "grade": "D",
+        "gradePoint": 4,
+        "creditPoint": 12,
+        "percentage": 42.86
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -5712,10 +5712,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -5725,10 +5725,10 @@
         "practical": 47,
         "endsem": 0,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 47
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 94
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -5738,10 +5738,10 @@
         "practical": 0,
         "endsem": 19,
         "marks": 33,
-        "grade": "F",
-        "gradePoint": 0,
-        "creditPoint": 0,
-        "percentage": 33
+        "grade": "C",
+        "gradePoint": 5,
+        "creditPoint": 15,
+        "percentage": 47.14
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5751,17 +5751,17 @@
         "practical": 0,
         "endsem": 19,
         "marks": 33,
-        "grade": "F",
-        "gradePoint": 0,
-        "creditPoint": 0,
-        "percentage": 33
+        "grade": "C",
+        "gradePoint": 5,
+        "creditPoint": 15,
+        "percentage": 47.14
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 40,
-    "sgpa": 1.74,
-    "percentage": 17.39,
-    "classification": "Fail",
+    "totalCreditPoints": 146,
+    "sgpa": 6.35,
+    "percentage": 58.48,
+    "classification": "Above Average",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5780,10 +5780,10 @@
         "practical": 0,
         "endsem": 36,
         "marks": 56,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 56
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 80
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -5793,10 +5793,10 @@
         "practical": 0,
         "endsem": 42,
         "marks": 58,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 58
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 82.86
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -5806,10 +5806,10 @@
         "practical": 0,
         "endsem": 37,
         "marks": 56,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 56
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 80
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -5819,10 +5819,10 @@
         "practical": 47,
         "endsem": 0,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 47
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 94
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -5832,10 +5832,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -5845,10 +5845,10 @@
         "practical": 0,
         "endsem": 35,
         "marks": 53,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 53
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 75.71
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5858,17 +5858,17 @@
         "practical": 0,
         "endsem": 38,
         "marks": 57,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 57
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 81.43
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 130,
-    "sgpa": 5.65,
-    "percentage": 51.52,
-    "classification": "Above Average",
+    "totalCreditPoints": 212,
+    "sgpa": 9.22,
+    "percentage": 87.17,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5887,10 +5887,10 @@
         "practical": 0,
         "endsem": 33,
         "marks": 51,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 51
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 72.86
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -5900,10 +5900,10 @@
         "practical": 0,
         "endsem": 30,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 48
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 68.57
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -5913,10 +5913,10 @@
         "practical": 0,
         "endsem": 37,
         "marks": 55,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 55
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 78.57
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -5926,10 +5926,10 @@
         "practical": 45,
         "endsem": 0,
         "marks": 45,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 45
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 90
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -5939,10 +5939,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -5952,10 +5952,10 @@
         "practical": 0,
         "endsem": 37,
         "marks": 55,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 55
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 78.57
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -5965,17 +5965,17 @@
         "practical": 0,
         "endsem": 37,
         "marks": 56,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 56
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 80
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 127,
-    "sgpa": 5.52,
-    "percentage": 50.22,
-    "classification": "Above Average",
+    "totalCreditPoints": 200,
+    "sgpa": 8.7,
+    "percentage": 81.96,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -5994,10 +5994,10 @@
         "practical": 0,
         "endsem": 43,
         "marks": 63,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 63
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 30,
+        "percentage": 90
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -6007,10 +6007,10 @@
         "practical": 0,
         "endsem": 41,
         "marks": 61,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 61
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 87.14
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -6020,10 +6020,10 @@
         "practical": 0,
         "endsem": 42,
         "marks": 62,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 62
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 88.57
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -6033,10 +6033,10 @@
         "practical": 47,
         "endsem": 0,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 47
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 94
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -6046,10 +6046,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -6059,10 +6059,10 @@
         "practical": 0,
         "endsem": 42,
         "marks": 61,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 61
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 87.14
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -6072,17 +6072,17 @@
         "practical": 0,
         "endsem": 47,
         "marks": 67,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 67
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 30,
+        "percentage": 95.71
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 145,
-    "sgpa": 6.3,
-    "percentage": 58.04,
-    "classification": "Above Average",
+    "totalCreditPoints": 221,
+    "sgpa": 9.61,
+    "percentage": 91.09,
+    "classification": "Outstanding",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -6101,10 +6101,10 @@
         "practical": 0,
         "endsem": 27,
         "marks": 45,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 45
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 64.29
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -6114,10 +6114,10 @@
         "practical": 0,
         "endsem": 30,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 48
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 68.57
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -6127,10 +6127,10 @@
         "practical": 0,
         "endsem": 25,
         "marks": 43,
-        "grade": "D",
-        "gradePoint": 4,
-        "creditPoint": 12,
-        "percentage": 43
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 61.43
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -6140,10 +6140,10 @@
         "practical": 46,
         "endsem": 0,
         "marks": 46,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 46
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 92
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -6153,10 +6153,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -6166,10 +6166,10 @@
         "practical": 0,
         "endsem": 27,
         "marks": 45,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 45
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 64.29
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -6179,17 +6179,17 @@
         "practical": 0,
         "endsem": 28,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 48
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 68.57
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 112,
-    "sgpa": 4.87,
-    "percentage": 43.7,
-    "classification": "Fail",
+    "totalCreditPoints": 185,
+    "sgpa": 8.04,
+    "percentage": 75.43,
+    "classification": "Very Good",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -6208,10 +6208,10 @@
         "practical": 0,
         "endsem": 38,
         "marks": 57,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 57
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 81.43
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -6221,10 +6221,10 @@
         "practical": 0,
         "endsem": 36,
         "marks": 54,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 54
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 77.14
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -6234,10 +6234,10 @@
         "practical": 0,
         "endsem": 36,
         "marks": 54,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 54
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 77.14
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -6247,10 +6247,10 @@
         "practical": 47,
         "endsem": 0,
         "marks": 47,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 47
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 94
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -6260,10 +6260,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -6273,10 +6273,10 @@
         "practical": 0,
         "endsem": 39,
         "marks": 57,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 57
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 81.43
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -6286,17 +6286,17 @@
         "practical": 0,
         "endsem": 41,
         "marks": 61,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 21,
-        "percentage": 61
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 27,
+        "percentage": 87.14
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 133,
-    "sgpa": 5.78,
-    "percentage": 52.83,
-    "classification": "Above Average",
+    "totalCreditPoints": 209,
+    "sgpa": 9.09,
+    "percentage": 85.87,
+    "classification": "Excellent",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -6315,10 +6315,10 @@
         "practical": 0,
         "endsem": 34,
         "marks": 53,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 53
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 75.71
       },
       {
         "subjectName": "ORGANIC CHEMISTRY-I",
@@ -6328,10 +6328,10 @@
         "practical": 0,
         "endsem": 25,
         "marks": 42,
-        "grade": "D",
-        "gradePoint": 4,
-        "creditPoint": 12,
-        "percentage": 42
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 60
       },
       {
         "subjectName": "PHYSICAL CHEMISTRY-I",
@@ -6340,11 +6340,11 @@
         "midsem": 18,
         "practical": 0,
         "endsem": 19,
-        "marks": 40,
-        "grade": "D",
-        "gradePoint": 4,
-        "creditPoint": 12,
-        "percentage": 40
+        "marks": 37,
+        "grade": "B",
+        "gradePoint": 6,
+        "creditPoint": 18,
+        "percentage": 52.86
       },
       {
         "subjectName": "INORGANIC CHEMISTRY PRACTICAL -I",
@@ -6354,10 +6354,10 @@
         "practical": 45,
         "endsem": 0,
         "marks": 45,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 45
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 90
       },
       {
         "subjectName": "ORGANIC CHEMISTRY PRACTICAL -I",
@@ -6367,10 +6367,10 @@
         "practical": 48,
         "endsem": 0,
         "marks": 48,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 20,
-        "percentage": 48
+        "grade": "O",
+        "gradePoint": 10,
+        "creditPoint": 40,
+        "percentage": 96
       },
       {
         "subjectName": "SPECTROSCOPY-I",
@@ -6380,10 +6380,10 @@
         "practical": 0,
         "endsem": 28,
         "marks": 46,
-        "grade": "C",
-        "gradePoint": 5,
-        "creditPoint": 15,
-        "percentage": 46
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 21,
+        "percentage": 65.71
       },
       {
         "subjectName": "COMPUTER FOR CHEMIST",
@@ -6393,17 +6393,17 @@
         "practical": 0,
         "endsem": 35,
         "marks": 54,
-        "grade": "B",
-        "gradePoint": 6,
-        "creditPoint": 18,
-        "percentage": 54
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 24,
+        "percentage": 77.14
       }
     ],
     "totalCredits": 23,
-    "totalCreditPoints": 115,
-    "sgpa": 5,
-    "percentage": 45,
-    "classification": "Second Class Hons.",
+    "totalCreditPoints": 188,
+    "sgpa": 8.17,
+    "percentage": 76.74,
+    "classification": "Very Good",
     "department": "CHEMISTRY",
     "stream": "SCIENCE"
   },
@@ -6454,17 +6454,17 @@
         "percentage": 91
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 27,
         "practical": 0,
         "endsem": 62,
-        "marks": 92,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 92
+        "marks": 89,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 89
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -6473,11 +6473,11 @@
         "midsem": 30,
         "practical": 65,
         "endsem": 58,
-        "marks": 153,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 153
+        "marks": 88,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 88
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -6494,10 +6494,10 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 232,
-    "sgpa": 9.67,
-    "percentage": 91.67,
-    "classification": "Outstanding",
+    "totalCreditPoints": 224,
+    "sgpa": 9.33,
+    "percentage": 88.33,
+    "classification": "Excellent",
     "department": "COMMERCE",
     "stream": "COMMERCE"
   },
@@ -6548,17 +6548,17 @@
         "percentage": 89
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 26,
         "practical": 0,
         "endsem": 56,
-        "marks": 86,
+        "marks": 82,
         "grade": "A+",
         "gradePoint": 9,
         "creditPoint": 36,
-        "percentage": 86
+        "percentage": 82
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -6567,11 +6567,11 @@
         "midsem": 30,
         "practical": 67,
         "endsem": 59,
-        "marks": 156,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 156
+        "marks": 89,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 89
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -6588,9 +6588,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 216,
-    "sgpa": 9,
-    "percentage": 85,
+    "totalCreditPoints": 212,
+    "sgpa": 8.83,
+    "percentage": 83.33,
     "classification": "Excellent",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -6642,17 +6642,17 @@
         "percentage": 78
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 29,
+        "midsem": 25,
         "practical": 0,
         "endsem": 53,
-        "marks": 82,
-        "grade": "A+",
-        "gradePoint": 9,
-        "creditPoint": 36,
-        "percentage": 82
+        "marks": 78,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 78
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -6661,11 +6661,11 @@
         "midsem": 30,
         "practical": 68,
         "endsem": 54,
-        "marks": 152,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 152
+        "marks": 84,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 84
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -6682,10 +6682,10 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 204,
-    "sgpa": 8.5,
-    "percentage": 80,
-    "classification": "Excellent",
+    "totalCreditPoints": 196,
+    "sgpa": 8.17,
+    "percentage": 76.67,
+    "classification": "Very Good",
     "department": "COMMERCE",
     "stream": "COMMERCE"
   },
@@ -6736,17 +6736,17 @@
         "percentage": 84
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 29,
+        "midsem": 27,
         "practical": 0,
         "endsem": 51,
-        "marks": 80,
-        "grade": "A+",
-        "gradePoint": 9,
-        "creditPoint": 36,
-        "percentage": 80
+        "marks": 78,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 78
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -6755,11 +6755,11 @@
         "midsem": 30,
         "practical": 69,
         "endsem": 50,
-        "marks": 149,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 149
+        "marks": 80,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 80
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -6776,9 +6776,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 220,
-    "sgpa": 9.17,
-    "percentage": 86.67,
+    "totalCreditPoints": 212,
+    "sgpa": 8.83,
+    "percentage": 83.33,
     "classification": "Excellent",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -6830,17 +6830,17 @@
         "percentage": 92
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 27,
         "practical": 0,
         "endsem": 55,
-        "marks": 85,
+        "marks": 82,
         "grade": "A+",
         "gradePoint": 9,
         "creditPoint": 36,
-        "percentage": 85
+        "percentage": 82
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -6849,11 +6849,11 @@
         "midsem": 30,
         "practical": 69,
         "endsem": 54,
-        "marks": 153,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 153
+        "marks": 84,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 84
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -6870,10 +6870,10 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 228,
-    "sgpa": 9.5,
-    "percentage": 90,
-    "classification": "Outstanding",
+    "totalCreditPoints": 224,
+    "sgpa": 9.33,
+    "percentage": 88.33,
+    "classification": "Excellent",
     "department": "COMMERCE",
     "stream": "COMMERCE"
   },
@@ -6924,17 +6924,17 @@
         "percentage": 80
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 26,
         "practical": 0,
         "endsem": 54,
-        "marks": 84,
+        "marks": 80,
         "grade": "A+",
         "gradePoint": 9,
         "creditPoint": 36,
-        "percentage": 84
+        "percentage": 80
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -6943,11 +6943,11 @@
         "midsem": 30,
         "practical": 68,
         "endsem": 52,
-        "marks": 150,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 150
+        "marks": 82,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 82
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -6964,9 +6964,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 220,
-    "sgpa": 9.17,
-    "percentage": 86.67,
+    "totalCreditPoints": 216,
+    "sgpa": 9,
+    "percentage": 85,
     "classification": "Excellent",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -7018,17 +7018,17 @@
         "percentage": 84
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 29,
+        "midsem": 27,
         "practical": 0,
         "endsem": 51,
-        "marks": 80,
-        "grade": "A+",
-        "gradePoint": 9,
-        "creditPoint": 36,
-        "percentage": 80
+        "marks": 78,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 78
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7037,11 +7037,11 @@
         "midsem": 30,
         "practical": 67,
         "endsem": 54,
-        "marks": 151,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 151
+        "marks": 84,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 84
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7058,9 +7058,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 216,
-    "sgpa": 9,
-    "percentage": 85,
+    "totalCreditPoints": 208,
+    "sgpa": 8.67,
+    "percentage": 81.67,
     "classification": "Excellent",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -7112,17 +7112,17 @@
         "percentage": 77
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 27,
+        "midsem": 26,
         "practical": 0,
         "endsem": 58,
-        "marks": 85,
+        "marks": 84,
         "grade": "A+",
         "gradePoint": 9,
         "creditPoint": 36,
-        "percentage": 85
+        "percentage": 84
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7131,11 +7131,11 @@
         "midsem": 30,
         "practical": 67,
         "endsem": 49,
-        "marks": 146,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 146
+        "marks": 79,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 79
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7152,10 +7152,10 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 208,
-    "sgpa": 8.67,
-    "percentage": 81.67,
-    "classification": "Excellent",
+    "totalCreditPoints": 200,
+    "sgpa": 8.33,
+    "percentage": 78.33,
+    "classification": "Very Good",
     "department": "COMMERCE",
     "stream": "COMMERCE"
   },
@@ -7206,17 +7206,17 @@
         "percentage": 65
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 20,
+        "midsem": 26,
         "practical": 0,
         "endsem": 44,
-        "marks": 64,
-        "grade": "B+",
-        "gradePoint": 7,
-        "creditPoint": 28,
-        "percentage": 64
+        "marks": 70,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 70
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7225,11 +7225,11 @@
         "midsem": 30,
         "practical": 67,
         "endsem": 41,
-        "marks": 138,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 138
+        "marks": 71,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 71
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7246,9 +7246,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 188,
-    "sgpa": 7.83,
-    "percentage": 73.33,
+    "totalCreditPoints": 184,
+    "sgpa": 7.67,
+    "percentage": 71.67,
     "classification": "Very Good",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -7300,17 +7300,17 @@
         "percentage": 28
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 28,
+        "midsem": 27,
         "practical": 0,
         "endsem": 0,
-        "marks": 28,
+        "marks": 27,
         "grade": "F",
         "gradePoint": 0,
         "creditPoint": 0,
-        "percentage": 28
+        "percentage": 27
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7319,11 +7319,11 @@
         "midsem": 30,
         "practical": 67,
         "endsem": 0,
-        "marks": 97,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 97
+        "marks": 30,
+        "grade": "F",
+        "gradePoint": 0,
+        "creditPoint": 0,
+        "percentage": 30
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7340,9 +7340,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 40,
-    "sgpa": 1.67,
-    "percentage": 16.67,
+    "totalCreditPoints": 0,
+    "sgpa": 0,
+    "percentage": 0,
     "classification": "Fail",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -7394,17 +7394,17 @@
         "percentage": 91
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 28,
         "practical": 0,
         "endsem": 60,
-        "marks": 90,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 90
+        "marks": 88,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 88
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7413,11 +7413,11 @@
         "midsem": 30,
         "practical": 69,
         "endsem": 55,
-        "marks": 154,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 154
+        "marks": 85,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 85
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7434,10 +7434,10 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 232,
-    "sgpa": 9.67,
-    "percentage": 91.67,
-    "classification": "Outstanding",
+    "totalCreditPoints": 224,
+    "sgpa": 9.33,
+    "percentage": 88.33,
+    "classification": "Excellent",
     "department": "COMMERCE",
     "stream": "COMMERCE"
   },
@@ -7488,17 +7488,17 @@
         "percentage": 72
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 28,
         "practical": 0,
         "endsem": 42,
-        "marks": 72,
+        "marks": 70,
         "grade": "A",
         "gradePoint": 8,
         "creditPoint": 32,
-        "percentage": 72
+        "percentage": 70
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7507,11 +7507,11 @@
         "midsem": 30,
         "practical": 70,
         "endsem": 45,
-        "marks": 145,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 145
+        "marks": 75,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 75
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7528,9 +7528,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 200,
-    "sgpa": 8.33,
-    "percentage": 78.33,
+    "totalCreditPoints": 192,
+    "sgpa": 8,
+    "percentage": 75,
     "classification": "Very Good",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -7582,17 +7582,17 @@
         "percentage": 70
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 26,
         "practical": 0,
         "endsem": 40,
-        "marks": 70,
-        "grade": "A",
-        "gradePoint": 8,
-        "creditPoint": 32,
-        "percentage": 70
+        "marks": 66,
+        "grade": "B+",
+        "gradePoint": 7,
+        "creditPoint": 28,
+        "percentage": 66
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7601,11 +7601,11 @@
         "midsem": 30,
         "practical": 70,
         "endsem": 41,
-        "marks": 141,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 141
+        "marks": 71,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 71
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7622,10 +7622,10 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 188,
-    "sgpa": 7.83,
-    "percentage": 73.33,
-    "classification": "Very Good",
+    "totalCreditPoints": 176,
+    "sgpa": 7.33,
+    "percentage": 68.33,
+    "classification": "Good",
     "department": "COMMERCE",
     "stream": "COMMERCE"
   },
@@ -7676,17 +7676,17 @@
         "percentage": 91
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 27,
         "practical": 0,
         "endsem": 58,
-        "marks": 88,
+        "marks": 85,
         "grade": "A+",
         "gradePoint": 9,
         "creditPoint": 36,
-        "percentage": 88
+        "percentage": 85
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7770,17 +7770,17 @@
         "percentage": 90
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 30,
+        "midsem": 28,
         "practical": 0,
         "endsem": 63,
-        "marks": 93,
+        "marks": 91,
         "grade": "O",
         "gradePoint": 10,
         "creditPoint": 40,
-        "percentage": 93
+        "percentage": 91
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7789,11 +7789,11 @@
         "midsem": 30,
         "practical": 69,
         "endsem": 58,
-        "marks": 157,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 157
+        "marks": 88,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 88
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7810,9 +7810,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 236,
-    "sgpa": 9.83,
-    "percentage": 93.33,
+    "totalCreditPoints": 232,
+    "sgpa": 9.67,
+    "percentage": 91.67,
     "classification": "Outstanding",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -7864,17 +7864,17 @@
         "percentage": 74
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 24,
+        "midsem": 26,
         "practical": 0,
         "endsem": 53,
-        "marks": 77,
+        "marks": 79,
         "grade": "A",
         "gradePoint": 8,
         "creditPoint": 32,
-        "percentage": 77
+        "percentage": 79
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -7883,11 +7883,11 @@
         "midsem": 24,
         "practical": 69,
         "endsem": 50,
-        "marks": 143,
-        "grade": "O",
-        "gradePoint": 10,
-        "creditPoint": 40,
-        "percentage": 143
+        "marks": 74,
+        "grade": "A",
+        "gradePoint": 8,
+        "creditPoint": 32,
+        "percentage": 74
       },
       {
         "subjectName": "RISK AND INSURANCE MANAGEMENT",
@@ -7904,9 +7904,9 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 200,
-    "sgpa": 8.33,
-    "percentage": 78.33,
+    "totalCreditPoints": 192,
+    "sgpa": 8,
+    "percentage": 75,
     "classification": "Very Good",
     "department": "COMMERCE",
     "stream": "COMMERCE"
@@ -7958,8 +7958,8 @@
         "percentage": 0
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
         "midsem": 0,
         "practical": 0,
@@ -8052,17 +8052,17 @@
         "percentage": 75
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 20,
+        "midsem": 25,
         "practical": 0,
         "endsem": 55,
-        "marks": 75,
-        "grade": "A",
-        "gradePoint": 8,
-        "creditPoint": 32,
-        "percentage": 75
+        "marks": 80,
+        "grade": "A+",
+        "gradePoint": 9,
+        "creditPoint": 36,
+        "percentage": 80
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -8092,10 +8092,10 @@
       }
     ],
     "totalCredits": 24,
-    "totalCreditPoints": 200,
-    "sgpa": 8.33,
-    "percentage": 78.33,
-    "classification": "Very Good",
+    "totalCreditPoints": 204,
+    "sgpa": 8.5,
+    "percentage": 80,
+    "classification": "Excellent",
     "department": "COMMERCE",
     "stream": "COMMERCE"
   },
@@ -8146,17 +8146,17 @@
         "percentage": 62
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 22,
+        "midsem": 26,
         "practical": 0,
         "endsem": 49,
-        "marks": 71,
+        "marks": 75,
         "grade": "A",
         "gradePoint": 8,
         "creditPoint": 32,
-        "percentage": 71
+        "percentage": 75
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
@@ -8240,17 +8240,17 @@
         "percentage": 64
       },
       {
-        "subjectName": "CORPORATE FINANCIAL ACCOUNTING",
-        "courseType": "PAPER1.3",
+        "subjectName": "FINANCIAL MANAGEMENT",
+        "courseType": "PAPER1.4",
         "credit": 4,
-        "midsem": 20,
+        "midsem": 21,
         "practical": 0,
         "endsem": 40,
-        "marks": 60,
+        "marks": 61,
         "grade": "B+",
         "gradePoint": 7,
         "creditPoint": 28,
-        "percentage": 60
+        "percentage": 61
       },
       {
         "subjectName": "ACCOUNTING FOR MANAGERIAL DECISION MAKING",
