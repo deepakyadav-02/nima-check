@@ -74,19 +74,55 @@ router.get('/profile', auth, async (req, res) => {
       return res.status(401).json({ message: 'User not found in token' });
     }
     
-    const { autonomousRollNo, studentType } = req.user;
+    let { autonomousRollNo, studentType } = req.user;
     
-    if (!autonomousRollNo || !studentType) {
-      console.error('Missing required fields:', { autonomousRollNo, studentType });
+    if (!autonomousRollNo) {
+      console.error('Missing autonomousRollNo:', req.user);
       return res.status(400).json({ 
-        message: 'Invalid token data',
-        received: { autonomousRollNo, studentType }
+        message: 'Invalid token data - missing roll number',
+        received: req.user
       });
     }
 
+    // If studentType is missing or invalid, try to detect it from roll number
+    if (!studentType || !['UG', 'PG', 'BBA'].includes(studentType.toUpperCase())) {
+      console.log('StudentType missing or invalid, detecting from roll number:', {
+        studentType,
+        autonomousRollNo
+      });
+      
+      // Try to find student in all collections to determine type
+      const [ugStudent, pgStudent, bbaStudent] = await Promise.all([
+        UGStudent.findOne({ "Autonomous Roll No": autonomousRollNo }),
+        PGStudent.findOne({ "Autonomous Roll No": autonomousRollNo }),
+        BBAStudent.findOne({ "Autonomous Roll No": autonomousRollNo })
+      ]);
+
+      // Determine student type based on which collection has the student
+      if (bbaStudent && (bbaStudent["Department"] === "BBA " || bbaStudent["Roll No"]?.startsWith("BBA-"))) {
+        studentType = 'BBA';
+      } else if (pgStudent && (pgStudent["Course"] || pgStudent["Graduation Board"])) {
+        studentType = 'PG';
+      } else if (ugStudent) {
+        studentType = 'UG';
+      } else {
+        console.error('Student not found in any collection:', autonomousRollNo);
+        return res.status(404).json({ message: 'Student not found' });
+      }
+      
+      console.log('Detected student type:', studentType);
+    }
+
+    // Normalize studentType (handle case sensitivity and whitespace)
+    const normalizedStudentType = studentType.trim().toUpperCase();
+    console.log('Student type check:', { 
+      original: studentType, 
+      normalized: normalizedStudentType 
+    });
+
     let student;
     
-    switch (studentType) {
+    switch (normalizedStudentType) {
       case 'UG':
         student = await UGStudent.findOne({ 
           "Autonomous Roll No": autonomousRollNo 
@@ -103,7 +139,16 @@ router.get('/profile', auth, async (req, res) => {
         });
         break;
       default:
-        return res.status(400).json({ message: 'Invalid student type' });
+        console.error('Invalid student type received:', {
+          studentType,
+          normalizedStudentType,
+          reqUser: req.user
+        });
+        return res.status(400).json({ 
+          message: 'Invalid student type',
+          received: studentType,
+          expected: ['UG', 'PG', 'BBA']
+        });
     }
 
     if (!student) {
@@ -287,7 +332,29 @@ router.post('/upload-image', auth, async (req, res) => {
   }); // Debug log
   
   try {
-    const { autonomousRollNo, studentType } = req.user;
+    let { autonomousRollNo, studentType } = req.user;
+    
+    // If studentType is missing or invalid, try to detect it
+    if (!studentType || !['UG', 'PG', 'BBA'].includes(studentType.toUpperCase())) {
+      console.log('StudentType missing, detecting from roll number');
+      const [ugStudent, pgStudent, bbaStudent] = await Promise.all([
+        UGStudent.findOne({ "Autonomous Roll No": autonomousRollNo }),
+        PGStudent.findOne({ "Autonomous Roll No": autonomousRollNo }),
+        BBAStudent.findOne({ "Autonomous Roll No": autonomousRollNo })
+      ]);
+
+      if (bbaStudent && (bbaStudent["Department"] === "BBA " || bbaStudent["Roll No"]?.startsWith("BBA-"))) {
+        studentType = 'BBA';
+      } else if (pgStudent && (pgStudent["Course"] || pgStudent["Graduation Board"])) {
+        studentType = 'PG';
+      } else if (ugStudent) {
+        studentType = 'UG';
+      } else {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+    }
+    
+    const normalizedStudentType = studentType.trim().toUpperCase();
     const { image } = req.body; // Base64 encoded image string
 
     if (!image) {
@@ -302,7 +369,7 @@ router.post('/upload-image', auth, async (req, res) => {
 
     let student;
     
-    switch (studentType) {
+    switch (normalizedStudentType) {
       case 'UG':
         student = await UGStudent.findOne({ 
           "Autonomous Roll No": autonomousRollNo 
@@ -354,11 +421,33 @@ router.post('/upload-image', auth, async (req, res) => {
 // @access  Private
 router.delete('/delete-image', auth, async (req, res) => {
   try {
-    const { autonomousRollNo, studentType } = req.user;
+    let { autonomousRollNo, studentType } = req.user;
+    
+    // If studentType is missing or invalid, try to detect it
+    if (!studentType || !['UG', 'PG', 'BBA'].includes(studentType.toUpperCase())) {
+      console.log('StudentType missing, detecting from roll number');
+      const [ugStudent, pgStudent, bbaStudent] = await Promise.all([
+        UGStudent.findOne({ "Autonomous Roll No": autonomousRollNo }),
+        PGStudent.findOne({ "Autonomous Roll No": autonomousRollNo }),
+        BBAStudent.findOne({ "Autonomous Roll No": autonomousRollNo })
+      ]);
+
+      if (bbaStudent && (bbaStudent["Department"] === "BBA " || bbaStudent["Roll No"]?.startsWith("BBA-"))) {
+        studentType = 'BBA';
+      } else if (pgStudent && (pgStudent["Course"] || pgStudent["Graduation Board"])) {
+        studentType = 'PG';
+      } else if (ugStudent) {
+        studentType = 'UG';
+      } else {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+    }
+    
+    const normalizedStudentType = studentType.trim().toUpperCase();
 
     let student;
     
-    switch (studentType) {
+    switch (normalizedStudentType) {
       case 'UG':
         student = await UGStudent.findOne({ 
           "Autonomous Roll No": autonomousRollNo 
