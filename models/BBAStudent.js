@@ -49,6 +49,34 @@ const BBAStudentSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  "CC-301": {
+    type: String,
+    required: false
+  },
+  "CC-302": {
+    type: String,
+    required: false
+  },
+  "CC-303": {
+    type: String,
+    required: false
+  },
+  "MDE-301": {
+    type: String,
+    required: false
+  },
+  "SEC-301": {
+    type: String,
+    required: false
+  },
+  "VAC-301": {
+    type: String,
+    required: false
+  },
+  examCode: {
+    type: Number,
+    required: false
+  },
   dob: {
     type: String,
     required: false

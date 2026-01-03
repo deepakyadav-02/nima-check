@@ -5,6 +5,8 @@ const { body, validationResult } = require('express-validator');
 const UGStudent = require('../models/UGStudent');
 const PGStudent = require('../models/PGStudent');
 const BBAStudent = require('../models/BBAStudent');
+const UGFirstSem2025 = require('../models/UGFirstSem2025');
+const PGFirstSem2025 = require('../models/PGFirstSem2025');
 
 // Admin credentials (in production, use a proper Admin model with hashed passwords)
 const ADMIN_CREDENTIALS = {
@@ -27,26 +29,51 @@ router.post('/login', [
 
     const { autonomousRollNo, dob } = req.body;
 
-    // Check in all three models and find the best match
-    const [ugStudent, pgStudent, bbaStudent] = await Promise.all([
-      UGStudent.findOne({ "Autonomous Roll No": autonomousRollNo, dob: dob }),
-      PGStudent.findOne({ "Autonomous Roll No": autonomousRollNo, "DOB": dob }),
-      BBAStudent.findOne({ "Autonomous Roll No": autonomousRollNo, dob: dob })
+    // Trim whitespace from inputs
+    const trimmedRollNo = autonomousRollNo?.trim();
+    const trimmedDob = dob?.trim();
+
+    console.log('Login attempt:', { autonomousRollNo: trimmedRollNo, dob: trimmedDob });
+
+    // Check in all five models and find the best match
+    // For first year students (UGFirstSem2025, PGFirstSem2025), allow login with just Autonomous Roll No
+    // since they all have default DOB "01-01-2005"
+    const [ugStudent, pgStudent, bbaStudent, ugFirstSem2025, pgFirstSem2025] = await Promise.all([
+      UGStudent.findOne({ "Autonomous Roll No": trimmedRollNo, dob: trimmedDob }),
+      PGStudent.findOne({ "Autonomous Roll No": trimmedRollNo, "DOB": trimmedDob }),
+      BBAStudent.findOne({ "Autonomous Roll No": trimmedRollNo, dob: trimmedDob }),
+      // For first year students, check by Autonomous Roll No only (they all have default DOB)
+      UGFirstSem2025.findOne({ "Autonomous Roll No": trimmedRollNo }),
+      PGFirstSem2025.findOne({ "Autonomous Roll No": trimmedRollNo })
     ]);
+
+    console.log('Query results:', {
+      ugStudent: !!ugStudent,
+      pgStudent: !!pgStudent,
+      bbaStudent: !!bbaStudent,
+      ugFirstSem2025: !!ugFirstSem2025,
+      pgFirstSem2025: !!pgFirstSem2025
+    });
 
     let student = null;
     let studentType = null;
 
-    // Determine the correct student type based on department/course
+    // Determine the correct student type based on priority: BBA > PG > PGFirstSem2025 > UG > UGFirstSem2025
     if (bbaStudent && (bbaStudent["Department"] === "BBA " || bbaStudent["Roll No"]?.startsWith("BBA-"))) {
       student = bbaStudent;
       studentType = 'BBA';
     } else if (pgStudent && (pgStudent["Course"] || pgStudent["Graduation Board"])) {
       student = pgStudent;
       studentType = 'PG';
+    } else if (pgFirstSem2025) {
+      student = pgFirstSem2025;
+      studentType = 'PG2025';
     } else if (ugStudent) {
       student = ugStudent;
       studentType = 'UG';
+    } else if (ugFirstSem2025) {
+      student = ugFirstSem2025;
+      studentType = 'UG2025';
     }
 
     if (!student) {
@@ -59,7 +86,7 @@ router.post('/login', [
         id: student._id,
         autonomousRollNo: autonomousRollNo,
         studentType: studentType,
-        name: student["Name of the Students"] || student["Applicant Name"]
+        name: student["Name of the Students"] || student["Applicant Name"] || student["Name"]
       }
     };
 

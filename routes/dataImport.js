@@ -3,6 +3,8 @@ const router = express.Router();
 const UGStudent = require('../models/UGStudent');
 const PGStudent = require('../models/PGStudent');
 const BBAStudent = require('../models/BBAStudent');
+const UGFirstSem2025 = require('../models/UGFirstSem2025');
+const PGFirstSem2025 = require('../models/PGFirstSem2025');
 
 // @route   POST /api/data-import/ug-students
 // @desc    Import all UG students data
@@ -138,22 +140,82 @@ router.post('/all-students', async (req, res) => {
   }
 });
 
+// @route   POST /api/data-import/ug-firstsem2025
+// @desc    Import all UG First Sem 2025 students data
+// @access  Public
+router.post('/ug-firstsem2025', async (req, res) => {
+  try {
+    const { students } = req.body;
+
+    if (!students || !Array.isArray(students)) {
+      return res.status(400).json({ message: 'Students array is required' });
+    }
+
+    // Clear existing data
+    await UGFirstSem2025.deleteMany({});
+
+    // Insert new data
+    const result = await UGFirstSem2025.insertMany(students);
+
+    res.json({
+      message: `${result.length} UG First Sem 2025 students imported successfully`,
+      count: result.length
+    });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// @route   POST /api/data-import/pg-firstsem2025
+// @desc    Import all PG First Sem 2025 students data
+// @access  Public
+router.post('/pg-firstsem2025', async (req, res) => {
+  try {
+    const { students } = req.body;
+
+    if (!students || !Array.isArray(students)) {
+      return res.status(400).json({ message: 'Students array is required' });
+    }
+
+    // Clear existing data
+    await PGFirstSem2025.deleteMany({});
+
+    // Insert new data
+    const result = await PGFirstSem2025.insertMany(students);
+
+    res.json({
+      message: `${result.length} PG First Sem 2025 students imported successfully`,
+      count: result.length
+    });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 // @route   GET /api/data-import/status
 // @desc    Get import status (count of students in each model)
 // @access  Public
 router.get('/status', async (req, res) => {
   try {
-    const [ugCount, pgCount, bbaCount] = await Promise.all([
+    const [ugCount, pgCount, bbaCount, ugFirstSem2025Count, pgFirstSem2025Count] = await Promise.all([
       UGStudent.countDocuments(),
       PGStudent.countDocuments(),
-      BBAStudent.countDocuments()
+      BBAStudent.countDocuments(),
+      UGFirstSem2025.countDocuments(),
+      PGFirstSem2025.countDocuments()
     ]);
 
     res.json({
       ugStudents: ugCount,
       pgStudents: pgCount,
       bbaStudents: bbaCount,
-      totalStudents: ugCount + pgCount + bbaCount
+      ugFirstSem2025: ugFirstSem2025Count,
+      pgFirstSem2025: pgFirstSem2025Count,
+      totalStudents: ugCount + pgCount + bbaCount + ugFirstSem2025Count + pgFirstSem2025Count
     });
 
   } catch (error) {

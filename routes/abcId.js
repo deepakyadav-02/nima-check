@@ -5,6 +5,8 @@ const adminAuth = require('../middleware/adminAuth');
 const UGStudent = require('../models/UGStudent');
 const PGStudent = require('../models/PGStudent');
 const BBAStudent = require('../models/BBAStudent');
+const UGFirstSem2025 = require('../models/UGFirstSem2025');
+const PGFirstSem2025 = require('../models/PGFirstSem2025');
 const ABCIDSubmission = require('../models/ABCIDSubmission');
 
 // Helper function to get student model based on type
@@ -16,6 +18,10 @@ const getStudentModel = (studentType) => {
       return PGStudent;
     case 'BBA':
       return BBAStudent;
+    case 'UG2025':
+      return UGFirstSem2025;
+    case 'PG2025':
+      return PGFirstSem2025;
     default:
       return null;
   }
@@ -30,6 +36,10 @@ const getModelName = (studentType) => {
       return 'PGStudent';
     case 'BBA':
       return 'BBAStudent';
+    case 'UG2025':
+      return 'UGFirstSem2025';
+    case 'PG2025':
+      return 'PGFirstSem2025';
     default:
       return null;
   }

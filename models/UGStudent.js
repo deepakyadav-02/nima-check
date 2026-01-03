@@ -41,6 +41,88 @@ const UGStudentSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  "Major-CP-5": {
+    type: String,
+    required: false
+  },
+  "Major-CP-6": {
+    type: String,
+    required: false
+  },
+  "Major-CP-7": {
+    type: String,
+    required: false
+  },
+  "MINOR-3": {
+    type: String,
+    required: false
+  },
+  "Multi Disciplinary-3": {
+    type: String,
+    required: false
+  },
+  "VAC-2": {
+    type: String,
+    required: false
+  },
+  examCode: {
+    type: Number,
+    required: false
+  },
+  // BBA Semester 2 fields
+  "CC-201": {
+    type: String,
+    required: false
+  },
+  "CC-202": {
+    type: String,
+    required: false
+  },
+  "CC-203": {
+    type: String,
+    required: false
+  },
+  "Multi Disciplinary-201": {
+    type: String,
+    required: false
+  },
+  "AEC-201": {
+    type: String,
+    required: false
+  },
+  "SEC-201": {
+    type: String,
+    required: false
+  },
+  "VAC-201-I.C": {
+    type: String,
+    required: false
+  },
+  // BBA Semester 3 fields
+  "CC-301": {
+    type: String,
+    required: false
+  },
+  "CC-302": {
+    type: String,
+    required: false
+  },
+  "CC-303": {
+    type: String,
+    required: false
+  },
+  "MDE-301": {
+    type: String,
+    required: false
+  },
+  "SEC-301": {
+    type: String,
+    required: false
+  },
+  "VAC-301": {
+    type: String,
+    required: false
+  },
   "Roll No": {
     type: String,
     required: false

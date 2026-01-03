@@ -4,6 +4,8 @@ const adminAuth = require('../middleware/adminAuth');
 const UGStudent = require('../models/UGStudent');
 const PGStudent = require('../models/PGStudent');
 const BBAStudent = require('../models/BBAStudent');
+const UGFirstSem2025 = require('../models/UGFirstSem2025');
+const PGFirstSem2025 = require('../models/PGFirstSem2025');
 const UGMarksheet = require('../models/UGMarksheet');
 
 // @route   POST /api/marksheet/bulk-upload
@@ -87,22 +89,42 @@ router.post('/bulk-upload', adminAuth, async (req, res) => {
               student = await BBAStudent.findById(marksheetData.studentId);
               if (student) {
                 studentType = 'BBAStudent';
+              } else {
+                student = await UGFirstSem2025.findById(marksheetData.studentId);
+                if (student) {
+                  studentType = 'UGFirstSem2025';
+                } else {
+                  student = await PGFirstSem2025.findById(marksheetData.studentId);
+                  if (student) {
+                    studentType = 'PGFirstSem2025';
+                  }
+                }
               }
             }
           }
         } else {
-          // Search by Autonomous Roll No in all collections
-          student = await UGStudent.findOne({ "Autonomous Roll No": rollNo });
+          // Search by Autonomous Roll No in all collections (priority: BBA > PG > PGFirstSem2025 > UG > UGFirstSem2025)
+          student = await BBAStudent.findOne({ "Autonomous Roll No": rollNo });
           if (student) {
-            studentType = 'UGStudent';
+            studentType = 'BBAStudent';
           } else {
             student = await PGStudent.findOne({ "Autonomous Roll No": rollNo });
             if (student) {
               studentType = 'PGStudent';
             } else {
-              student = await BBAStudent.findOne({ "Autonomous Roll No": rollNo });
+              student = await PGFirstSem2025.findOne({ "Autonomous Roll No": rollNo });
               if (student) {
-                studentType = 'BBAStudent';
+                studentType = 'PGFirstSem2025';
+              } else {
+                student = await UGStudent.findOne({ "Autonomous Roll No": rollNo });
+                if (student) {
+                  studentType = 'UGStudent';
+                } else {
+                  student = await UGFirstSem2025.findOne({ "Autonomous Roll No": rollNo });
+                  if (student) {
+                    studentType = 'UGFirstSem2025';
+                  }
+                }
               }
             }
           }
