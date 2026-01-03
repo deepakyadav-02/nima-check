@@ -17,7 +17,36 @@ const UGFirstSem2025Schema = new mongoose.Schema({
     type: String,
     required: false
   },
-  // First Semester Subjects
+  "Name of the Students": {
+    type: String,
+    required: false
+  },
+  // Regular UG First Semester Subjects
+  "Core-1-Major-1": {
+    type: String,
+    required: false
+  },
+  "Core-1-Major-2": {
+    type: String,
+    required: false
+  },
+  "Core-2-Minor-1": {
+    type: String,
+    required: false
+  },
+  "Multidisciplinary-1": {
+    type: String,
+    required: false
+  },
+  "AEC-I": {
+    type: String,
+    required: false
+  },
+  "VAC-I": {
+    type: String,
+    required: false
+  },
+  // BBA First Semester Subjects
   "CC-101": {
     type: String,
     required: false
@@ -38,7 +67,15 @@ const UGFirstSem2025Schema = new mongoose.Schema({
     type: String,
     required: false
   },
+  "AEC-102": {
+    type: String,
+    required: false
+  },
   "VAC-101": {
+    type: String,
+    required: false
+  },
+  Stream: {
     type: String,
     required: false
   },

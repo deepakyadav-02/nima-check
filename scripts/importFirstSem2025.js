@@ -53,11 +53,22 @@ const importUGFirstSem2025 = async () => {
       "Roll No": student["Roll No"] || null,
       "Autonomous Roll No": student["Autonomous Roll No"] || null,
       "Applicant Name": student["Applicant Name"] || null,
+      "Name of the Students": student["Name of the Students"] || null,
+      Stream: student.Stream || null,
+      // Regular UG First Semester Subjects
+      "Core-1-Major-1": student["Core-1-Major-1"] || null,
+      "Core-1-Major-2": student["Core-1-Major-2"] || null,
+      "Core-2-Minor-1": student["Core-2-Minor-1"] || null,
+      "Multidisciplinary-1": student["Multidisciplinary-1"] || null,
+      "AEC-I": student["AEC-I"] || null,
+      "VAC-I": student["VAC-I"] || null,
+      // BBA First Semester Subjects
       "CC-101": student["CC-101"] || null,
       "CC-102": student["CC-102"] || null,
       "CC-103": student["CC-103"] || null,
       "MDE-101": student["MDE-101"] || null,
       "AEC-101": student["AEC-101"] || null,
+      "AEC-102": student["AEC-102"] || null,
       "VAC-101": student["VAC-101"] || null,
       // Always include these fields with defaults (matching UGStudent model)
       dob: student.dob || "01-01-2005",
