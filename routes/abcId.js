@@ -51,7 +51,7 @@ const getModelName = (studentType) => {
 router.post('/submit', auth, async (req, res) => {
   try {
     const { ABC_ID } = req.body;
-    const { autonomousRollNo, studentType } = req.user.user;
+    const { autonomousRollNo, studentType } = req.user;
 
     if (!ABC_ID) {
       return res.status(400).json({ message: 'ABC_ID is required' });
@@ -143,7 +143,7 @@ router.post('/submit', auth, async (req, res) => {
 // @access  Private (Student)
 router.get('/my-submission', auth, async (req, res) => {
   try {
-    const { autonomousRollNo, studentType } = req.user.user;
+    const { autonomousRollNo, studentType } = req.user;
 
     const StudentModel = getStudentModel(studentType);
     if (!StudentModel) {

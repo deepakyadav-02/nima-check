@@ -9,7 +9,7 @@ const ABCIDSubmissionSchema = new mongoose.Schema({
   studentType: {
     type: String,
     required: true,
-    enum: ['UGStudent', 'BBAStudent', 'PGStudent']
+    enum: ['UGStudent', 'BBAStudent', 'PGStudent', 'UGFirstSem2025', 'PGFirstSem2025']
   },
   autonomousRollNo: {
     type: String,

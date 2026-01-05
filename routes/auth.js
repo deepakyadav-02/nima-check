@@ -18,7 +18,8 @@ const ADMIN_CREDENTIALS = {
 // @desc    Authenticate student & get token
 // @access  Public
 router.post('/login', [
-  body('autonomousRollNo', 'Autonomous Roll No is required').not().isEmpty(),
+  body('autonomousRollNo', 'Roll No is required').optional().not().isEmpty(),
+  body('rollNo', 'Roll No is required').optional().not().isEmpty(),
   body('dob', 'Date of Birth is required').not().isEmpty()
 ], async (req, res) => {
   try {
@@ -27,24 +28,71 @@ router.post('/login', [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { autonomousRollNo, dob } = req.body;
+    // Accept either autonomousRollNo or rollNo for backward compatibility
+    const rollNoInput = req.body.autonomousRollNo || req.body.rollNo;
+    const { dob } = req.body;
+
+    if (!rollNoInput) {
+      return res.status(400).json({ message: 'Roll No (Autonomous Roll No, Roll No, or College Roll No) is required' });
+    }
 
     // Trim whitespace from inputs
-    const trimmedRollNo = autonomousRollNo?.trim();
+    const trimmedRollNo = rollNoInput?.trim();
     const trimmedDob = dob?.trim();
 
-    console.log('Login attempt:', { autonomousRollNo: trimmedRollNo, dob: trimmedDob });
+    console.log('Login attempt:', { rollNo: trimmedRollNo, dob: trimmedDob });
+
+    // Build query conditions for each model that check all possible roll number fields
+    // For UGStudent: check "Autonomous Roll No" OR "Roll No"
+    const ugQuery = {
+      $or: [
+        { "Autonomous Roll No": trimmedRollNo },
+        { "Roll No": trimmedRollNo }
+      ],
+      dob: trimmedDob
+    };
+
+    // For PGStudent: check "Autonomous Roll No" OR "College Roll No"
+    const pgQuery = {
+      $or: [
+        { "Autonomous Roll No": trimmedRollNo },
+        { "College Roll No": trimmedRollNo }
+      ],
+      "DOB": trimmedDob
+    };
+
+    // For BBAStudent: check "Autonomous Roll No" OR "Roll No"
+    const bbaQuery = {
+      $or: [
+        { "Autonomous Roll No": trimmedRollNo },
+        { "Roll No": trimmedRollNo }
+      ],
+      dob: trimmedDob
+    };
+
+    // For UGFirstSem2025: check "Autonomous Roll No" OR "Roll No" (no DOB check - default DOB)
+    const ugFirstSem2025Query = {
+      $or: [
+        { "Autonomous Roll No": trimmedRollNo },
+        { "Roll No": trimmedRollNo }
+      ]
+    };
+
+    // For PGFirstSem2025: check "Autonomous Roll No" OR "College Roll No" (no DOB check - default DOB)
+    const pgFirstSem2025Query = {
+      $or: [
+        { "Autonomous Roll No": trimmedRollNo },
+        { "College Roll No": trimmedRollNo }
+      ]
+    };
 
     // Check in all five models and find the best match
-    // For first year students (UGFirstSem2025, PGFirstSem2025), allow login with just Autonomous Roll No
-    // since they all have default DOB "01-01-2005"
     const [ugStudent, pgStudent, bbaStudent, ugFirstSem2025, pgFirstSem2025] = await Promise.all([
-      UGStudent.findOne({ "Autonomous Roll No": trimmedRollNo, dob: trimmedDob }),
-      PGStudent.findOne({ "Autonomous Roll No": trimmedRollNo, "DOB": trimmedDob }),
-      BBAStudent.findOne({ "Autonomous Roll No": trimmedRollNo, dob: trimmedDob }),
-      // For first year students, check by Autonomous Roll No only (they all have default DOB)
-      UGFirstSem2025.findOne({ "Autonomous Roll No": trimmedRollNo }),
-      PGFirstSem2025.findOne({ "Autonomous Roll No": trimmedRollNo })
+      UGStudent.findOne(ugQuery),
+      PGStudent.findOne(pgQuery),
+      BBAStudent.findOne(bbaQuery),
+      UGFirstSem2025.findOne(ugFirstSem2025Query),
+      PGFirstSem2025.findOne(pgFirstSem2025Query)
     ]);
 
     console.log('Query results:', {
@@ -79,6 +127,9 @@ router.post('/login', [
     if (!student) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
+
+    // Get the actual autonomous roll no from the student record for JWT payload
+    const autonomousRollNo = student["Autonomous Roll No"] || trimmedRollNo;
 
     // Create JWT payload
     const payload = {

@@ -47,6 +47,34 @@ const schemaDefinition = {
     type: String,
     required: false
   },
+  "PAPER-1.8": {
+    type: String,
+    required: false
+  },
+  "PAPER-MTC-101": {
+    type: String,
+    required: false
+  },
+  "PAPER-MTC-102": {
+    type: String,
+    required: false
+  },
+  "PAPER-MTC-103": {
+    type: String,
+    required: false
+  },
+  "PAPER-MTC-104": {
+    type: String,
+    required: false
+  },
+  "PAPER-MTC-105": {
+    type: String,
+    required: false
+  },
+  Stream: {
+    type: String,
+    required: false
+  },
   dob: {
     type: String,
     required: false,

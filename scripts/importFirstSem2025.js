@@ -144,6 +144,13 @@ const importPGFirstSem2025 = async () => {
         "PAPER-1.5": student["PAPER-1.5"] || null,
         "PAPER-1.6": student["PAPER-1.6"] || null,
         "PAPER-1.7": student["PAPER-1.7"] || null,
+        "PAPER-1.8": student["PAPER-1.8"] || null,
+        "PAPER-MTC-101": student["PAPER-MTC-101"] || null,
+        "PAPER-MTC-102": student["PAPER-MTC-102"] || null,
+        "PAPER-MTC-103": student["PAPER-MTC-103"] || null,
+        "PAPER-MTC-104": student["PAPER-MTC-104"] || null,
+        "PAPER-MTC-105": student["PAPER-MTC-105"] || null,
+        Stream: student.Stream || null,
         // Always include these fields with defaults (matching UGStudent model)
         dob: student.DOB || student.dob || "01-01-2005",
         ABC_ID: student.ABC_ID || null,
