@@ -4,7 +4,9 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
 // Load environment variables
-dotenv.config({ path: './config.env' });
+// Support both .env and config.env (do not overwrite already-set vars)
+dotenv.config({ path: './.env', override: false });
+dotenv.config({ path: './config.env', override: false });
 
 // Connect to database
 connectDB();
@@ -22,6 +24,7 @@ app.use('/api/students', require('./routes/students'));
 app.use('/api/data-import', require('./routes/dataImport'));
 app.use('/api/marksheet', require('./routes/marksheet'));
 app.use('/api/abc-id', require('./routes/abcId'));
+app.use('/api/ug-2ndsem2024', require('./routes/ugSecondSem2024'));
 
 // Health check route
 app.get('/health', (req, res) => {
@@ -42,7 +45,8 @@ app.get('/', (req, res) => {
       students: '/api/students',
       dataImport: '/api/data-import',
       marksheet: '/api/marksheet',
-      abcId: '/api/abc-id'
+      abcId: '/api/abc-id',
+      ug2ndsem2024: '/api/ug-2ndsem2024'
     }
   });
 });
