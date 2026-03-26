@@ -7,6 +7,7 @@ const BBAStudent = require('../models/BBAStudent');
 const UGFirstSem2025 = require('../models/UGFirstSem2025');
 const PGFirstSem2025 = require('../models/PGFirstSem2025');
 const UGMarksheet = require('../models/UGMarksheet');
+const UGSecondSem2024 = require('../models/UGSecondSem2024');
 
 // @route   POST /api/marksheet/bulk-upload
 // @desc    Bulk upload marks for multiple students
@@ -298,6 +299,7 @@ router.get('/student/:studentId', async (req, res) => {
 router.get('/autonomous/:autonomousRollNo', async (req, res) => {
   try {
     const autonomousRollNo = req.params.autonomousRollNo;
+    const secondSem2024 = await UGSecondSem2024.findOne({ 'Autonomous Roll No': autonomousRollNo }).lean();
     
     // Search in all three collections - find ALL students with this roll number
     const ugStudents = await UGStudent.find({ 
@@ -446,7 +448,8 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
         department: marksheetStudent.Department || marksheetStudent.Course || 'N/A',
         studentType: studentType
       },
-      marksheets
+      marksheets,
+      secondSem2024
     });
   } catch (error) {
     console.error(error.message);
