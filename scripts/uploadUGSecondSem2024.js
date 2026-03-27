@@ -23,6 +23,7 @@ async function uploadUGSecondSem2024() {
     const args = process.argv.slice(2);
     const fileFlagIndex = args.indexOf('--file');
     const fileArg = fileFlagIndex !== -1 ? args[fileFlagIndex + 1] : null;
+    const replaceBba = args.includes('--replace-bba');
     const filePath = fileArg
       ? path.resolve(__dirname, '..', fileArg)
       : path.resolve(__dirname, '..', 'JSONS', 'finaljson2NDSEM-UG-with-grace.json');
@@ -45,6 +46,13 @@ async function uploadUGSecondSem2024() {
 
     // Use native collection for speed/consistency with your existing scripts
     const collection = mongoose.connection.db.collection('2ndsem2024');
+
+    if (replaceBba) {
+      const del = await collection.deleteMany({
+        $or: [{ Department: 'BBA' }, { Department: { $regex: /^BBA\s*$/i } }],
+      });
+      console.log(`🗑️  Removed previous BBA rows from 2ndsem2024: ${del.deletedCount}\n`);
+    }
 
     const ops = [];
     let skipped = 0;

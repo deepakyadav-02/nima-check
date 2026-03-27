@@ -46,7 +46,8 @@ const UGSecondSem2024Schema = new mongoose.Schema(
   },
   {
     timestamps: false,
-    strict: true,
+    // Collection holds UG and BBA 2nd-sem shapes (different course keys); do not strip unknown fields.
+    strict: false,
   }
 );
 

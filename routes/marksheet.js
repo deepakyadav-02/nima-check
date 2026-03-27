@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const adminAuth = require('../middleware/adminAuth');
 const UGStudent = require('../models/UGStudent');
@@ -7,7 +8,6 @@ const BBAStudent = require('../models/BBAStudent');
 const UGFirstSem2025 = require('../models/UGFirstSem2025');
 const PGFirstSem2025 = require('../models/PGFirstSem2025');
 const UGMarksheet = require('../models/UGMarksheet');
-const UGSecondSem2024 = require('../models/UGSecondSem2024');
 
 // @route   POST /api/marksheet/bulk-upload
 // @desc    Bulk upload marks for multiple students
@@ -298,8 +298,14 @@ router.get('/student/:studentId', async (req, res) => {
 // @access  Public
 router.get('/autonomous/:autonomousRollNo', async (req, res) => {
   try {
-    const autonomousRollNo = req.params.autonomousRollNo;
-    const secondSem2024 = await UGSecondSem2024.findOne({ 'Autonomous Roll No': autonomousRollNo }).lean();
+    const autonomousRollNo = req.params.autonomousRollNo?.trim();
+    if (!autonomousRollNo) {
+      return res.status(400).json({ message: 'Autonomous Roll No is required' });
+    }
+    // Native collection read: UG + BBA rows store different course keys; strict Mongoose schema strips BBA fields.
+    const secondSem2024 = await mongoose.connection.db
+      .collection('2ndsem2024')
+      .findOne({ 'Autonomous Roll No': autonomousRollNo });
     
     // Search in all three collections - find ALL students with this roll number
     const ugStudents = await UGStudent.find({ 
@@ -319,6 +325,22 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
     const allStudentIds = [...allUGIds, ...allPGIds, ...allBBAIds];
 
     if (allStudentIds.length === 0) {
+      // BBA/UG 2nd-sem row may exist without a student doc (e.g. only results JSON uploaded)
+      if (secondSem2024) {
+        const dept = String(secondSem2024.Department || '');
+        const inferredType = dept.toUpperCase().includes('BBA') ? 'BBAStudent' : 'UGStudent';
+        return res.json({
+          student: {
+            name: secondSem2024['Name of the Students'] || 'N/A',
+            autonomousRollNo: secondSem2024['Autonomous Roll No'] || autonomousRollNo,
+            rollNo: secondSem2024['Roll No'] || 'N/A',
+            department: secondSem2024.Department || 'N/A',
+            studentType: inferredType,
+          },
+          marksheets: [],
+          secondSem2024,
+        });
+      }
       return res.status(404).json({ message: 'Student not found' });
     }
 
@@ -403,6 +425,31 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
     }
 
     if (!marksheets || marksheets.length === 0) {
+      // Allow BBA/UG 2nd-sem-only: data may live in 2ndsem2024 without any UGMarksheet rows yet
+      if (secondSem2024) {
+        const studentName =
+          secondSem2024['Name of the Students'] ||
+          student['Name of the Students'] ||
+          student['Applicant Name'] ||
+          'N/A';
+        const rollNo =
+          secondSem2024['Roll No'] ||
+          student['Roll No'] ||
+          student['College Roll No'] ||
+          'N/A';
+        return res.json({
+          student: {
+            name: studentName,
+            autonomousRollNo: secondSem2024['Autonomous Roll No'] || autonomousRollNo,
+            rollNo,
+            department: secondSem2024.Department || student.Department || 'N/A',
+            studentType,
+          },
+          marksheets: [],
+          secondSem2024,
+        });
+      }
+
       const studentName = student["Name of the Students"] || student["Applicant Name"] || 'N/A';
       return res.status(404).json({ 
         message: 'No marksheets found for this student',

@@ -1,7 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
-
-const UGSecondSem2024 = require('../models/UGSecondSem2024');
 
 // @route   GET /api/ug-2ndsem2024/autonomous/:autonomousRollNo
 // @desc    Get UG 2nd semester (2024) record by autonomous roll number
@@ -14,7 +13,9 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
       return res.status(400).json({ message: 'Autonomous Roll No is required' });
     }
 
-    const doc = await UGSecondSem2024.findOne({ 'Autonomous Roll No': autonomousRollNo }).lean();
+    const doc = await mongoose.connection.db
+      .collection('2ndsem2024')
+      .findOne({ 'Autonomous Roll No': autonomousRollNo });
 
     if (!doc) {
       return res.status(404).json({ message: '2nd semester record not found' });
