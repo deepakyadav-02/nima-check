@@ -306,6 +306,10 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
     const secondSem2024 = await mongoose.connection.db
       .collection('2ndsem2024')
       .findOne({ 'Autonomous Roll No': autonomousRollNo });
+    // Native collection read: PG 2nd-sem marks live in their own collection with camelCase keys.
+    const pgSecondSem2024 = await mongoose.connection.db
+      .collection('pg2ndsem2024')
+      .findOne({ autonomousRollNo });
     
     // Search in all three collections - find ALL students with this roll number
     const ugStudents = await UGStudent.find({ 
@@ -325,7 +329,7 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
     const allStudentIds = [...allUGIds, ...allPGIds, ...allBBAIds];
 
     if (allStudentIds.length === 0) {
-      // BBA/UG 2nd-sem row may exist without a student doc (e.g. only results JSON uploaded)
+      // 2nd-sem rows may exist without a student doc (e.g. only results JSON uploaded)
       if (secondSem2024) {
         const dept = String(secondSem2024.Department || '');
         const inferredType = dept.toUpperCase().includes('BBA') ? 'BBAStudent' : 'UGStudent';
@@ -339,6 +343,21 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
           },
           marksheets: [],
           secondSem2024,
+          pgSecondSem2024,
+        });
+      }
+      if (pgSecondSem2024) {
+        return res.json({
+          student: {
+            name: pgSecondSem2024.applicantName || 'N/A',
+            autonomousRollNo: pgSecondSem2024.autonomousRollNo || autonomousRollNo,
+            rollNo: pgSecondSem2024.collegeRollNo || 'N/A',
+            department: pgSecondSem2024.department || pgSecondSem2024.course || 'N/A',
+            studentType: 'PGStudent',
+          },
+          marksheets: [],
+          secondSem2024,
+          pgSecondSem2024,
         });
       }
       return res.status(404).json({ message: 'Student not found' });
@@ -447,6 +466,32 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
           },
           marksheets: [],
           secondSem2024,
+          pgSecondSem2024,
+        });
+      }
+      // Allow PG 2nd-sem-only: data may live in pg2ndsem2024 without any UGMarksheet rows yet
+      if (pgSecondSem2024) {
+        const studentName =
+          pgSecondSem2024.applicantName ||
+          student['Name of the Students'] ||
+          student['Applicant Name'] ||
+          'N/A';
+        const rollNo =
+          pgSecondSem2024.collegeRollNo ||
+          student['Roll No'] ||
+          student['College Roll No'] ||
+          'N/A';
+        return res.json({
+          student: {
+            name: studentName,
+            autonomousRollNo: pgSecondSem2024.autonomousRollNo || autonomousRollNo,
+            rollNo,
+            department: pgSecondSem2024.department || student.Department || student.Course || 'N/A',
+            studentType,
+          },
+          marksheets: [],
+          secondSem2024,
+          pgSecondSem2024,
         });
       }
 
@@ -496,7 +541,8 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
         studentType: studentType
       },
       marksheets,
-      secondSem2024
+      secondSem2024,
+      pgSecondSem2024
     });
   } catch (error) {
     console.error(error.message);

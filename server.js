@@ -25,6 +25,7 @@ app.use('/api/data-import', require('./routes/dataImport'));
 app.use('/api/marksheet', require('./routes/marksheet'));
 app.use('/api/abc-id', require('./routes/abcId'));
 app.use('/api/ug-2ndsem2024', require('./routes/ugSecondSem2024'));
+app.use('/api/pg-2ndsem2024', require('./routes/pgSecondSem2024'));
 
 // Health check route
 app.get('/health', (req, res) => {
@@ -46,7 +47,8 @@ app.get('/', (req, res) => {
       dataImport: '/api/data-import',
       marksheet: '/api/marksheet',
       abcId: '/api/abc-id',
-      ug2ndsem2024: '/api/ug-2ndsem2024'
+      ug2ndsem2024: '/api/ug-2ndsem2024',
+      pg2ndsem2024: '/api/pg-2ndsem2024'
     }
   });
 });
