@@ -6,6 +6,30 @@ const dotenv = require('dotenv');
 const connectDB = require('../config/db');
 const PGSecondSem2024 = require('../models/PGSecondSem2024');
 
+const pickTrimmed = (row, keys) => {
+  for (const k of keys) {
+    const v = row?.[k];
+    if (v !== null && v !== undefined && String(v).trim() !== '') return String(v).trim();
+  }
+  return '';
+};
+
+const normalizeRow = (row) => {
+  const autonomousRollNo = pickTrimmed(row, ['autonomousRollNo', 'Autonomous Roll No', 'AutonomousRollNo']);
+  const collegeRollNo = pickTrimmed(row, ['collegeRollNo', 'Roll No', 'CollegeRollNo']);
+  const applicantName = pickTrimmed(row, ['applicantName', 'Name of the Students', 'Name']);
+  const department = pickTrimmed(row, ['department', 'Department']);
+
+  return {
+    ...row,
+    autonomousRollNo,
+    collegeRollNo,
+    applicantName,
+    department,
+    studentType: row?.studentType ?? 'PGStudent',
+  };
+};
+
 async function uploadPGSecondSem2024() {
   try {
     dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
@@ -22,6 +46,7 @@ async function uploadPGSecondSem2024() {
     const args = process.argv.slice(2);
     const fileFlagIndex = args.indexOf('--file');
     const fileArg = fileFlagIndex !== -1 ? args[fileFlagIndex + 1] : null;
+    const replaceAll = args.includes('--replace-all');
     const filePath = fileArg
       ? path.resolve(__dirname, '..', fileArg)
       : path.resolve(__dirname, '..', 'JSONS', 'pgmarkwith_rollnumber.json');
@@ -48,14 +73,21 @@ async function uploadPGSecondSem2024() {
 
     const collection = mongoose.connection.db.collection(collectionName);
 
+    if (replaceAll) {
+      console.log(`🗑️  --replace-all enabled: deleting existing docs in ${collectionName}...\n`);
+      const del = await collection.deleteMany({});
+      console.log(`🗑️  Removed previous rows from ${collectionName}: ${del.deletedCount}\n`);
+    }
+
     const ops = [];
     let skipped = 0;
 
     for (const row of rows) {
+      const normalized = normalizeRow(row);
       const autonomousRollNo =
-        row?.autonomousRollNo != null ? String(row.autonomousRollNo).trim() : '';
+        normalized?.autonomousRollNo != null ? String(normalized.autonomousRollNo).trim() : '';
       const collegeRollNo =
-        row?.collegeRollNo != null ? String(row.collegeRollNo).trim() : '';
+        normalized?.collegeRollNo != null ? String(normalized.collegeRollNo).trim() : '';
 
       const filter = autonomousRollNo
         ? { autonomousRollNo }
@@ -71,7 +103,7 @@ async function uploadPGSecondSem2024() {
       ops.push({
         updateOne: {
           filter,
-          update: { $set: row },
+          update: { $set: normalized },
           upsert: true,
         },
       });

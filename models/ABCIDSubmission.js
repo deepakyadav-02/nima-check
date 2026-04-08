@@ -47,7 +47,6 @@ const ABCIDSubmissionSchema = new mongoose.Schema({
 
 // Index for faster queries
 ABCIDSubmissionSchema.index({ autonomousRollNo: 1 });
-ABCIDSubmissionSchema.index({ ABC_ID: 1 });
 ABCIDSubmissionSchema.index({ status: 1 });
 
 module.exports = mongoose.model('ABCIDSubmission', ABCIDSubmissionSchema);

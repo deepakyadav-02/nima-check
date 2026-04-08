@@ -309,7 +309,15 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
     // Native collection read: PG 2nd-sem marks live in their own collection with camelCase keys.
     const pgSecondSem2024 = await mongoose.connection.db
       .collection('pg2ndsem2024')
-      .findOne({ autonomousRollNo });
+      .findOne({
+        $or: [
+          { autonomousRollNo },
+          { collegeRollNo: autonomousRollNo },
+          { 'College Roll No': autonomousRollNo },
+          { 'College Roll Number': autonomousRollNo },
+          { 'Roll No': autonomousRollNo },
+        ],
+      });
     
     // Search in all three collections - find ALL students with this roll number
     const ugStudents = await UGStudent.find({ 

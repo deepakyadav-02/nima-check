@@ -16,7 +16,15 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
 
     const doc = await mongoose.connection.db
       .collection('pg2ndsem2024')
-      .findOne({ autonomousRollNo });
+      .findOne({
+        $or: [
+          { autonomousRollNo },
+          { collegeRollNo: autonomousRollNo },
+          { 'College Roll No': autonomousRollNo },
+          { 'College Roll Number': autonomousRollNo },
+          { 'Roll No': autonomousRollNo },
+        ],
+      });
 
     if (!doc) {
       return res.status(404).json({ message: 'PG 2nd semester record not found' });
