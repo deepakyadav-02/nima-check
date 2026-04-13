@@ -3370,12 +3370,12 @@
       "Paper 2.4": {
         "subject": "ME",
         "mid": 26,
-        "end": 45,
-        "TotalMark": "71",
-        "Grade": "A",
-        "Grade Point": "8",
+        "end": 52,
+        "TotalMark": "78",
+        "Grade": "A+",
+        "Grade Point": "9",
         "Credit": "6",
-        "CP": "48"
+        "CP": "54"
       },
       "Paper 2.5": {
         "subject": "SBN",
@@ -3398,10 +3398,10 @@
         "CP": "48"
       }
     },
-    "GrandTotalMark": "402",
-    "Percentage": "67.00",
-    "Classification": "F",
-    "TotalCreditPoint": "246"
+    "GrandTotalMark": "414",
+    "Percentage": "69.00",
+    "Classification": "Very Good",
+    "TotalCreditPoint": "276"
   },
   {
     "Roll No": "COMM24-013",

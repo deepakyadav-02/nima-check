@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 
 const connectDB = require('../config/db');
 const PGSecondSem2024 = require('../models/PGSecondSem2024');
+const { loadEnv } = require('../utils/loadEnv');
+const { parseCliArgs } = require('../utils/cliArgs');
+const { readJsonFile } = require('../utils/jsonFile');
 
 const pickTrimmed = (row, keys) => {
   for (const k of keys) {
@@ -32,8 +34,7 @@ const normalizeRow = (row) => {
 
 async function uploadPGSecondSem2024() {
   try {
-    dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
-    dotenv.config({ path: path.resolve(__dirname, '..', 'config.env') });
+    loadEnv(path.resolve(__dirname, '..'));
 
     if (!process.env.MONGO_URI) {
       console.error('❌ Error: MONGO_URI is missing. Set it in config.env');
@@ -43,25 +44,16 @@ async function uploadPGSecondSem2024() {
     await connectDB();
     console.log('Connected to database\n');
 
-    const args = process.argv.slice(2);
-    const fileFlagIndex = args.indexOf('--file');
-    const fileArg = fileFlagIndex !== -1 ? args[fileFlagIndex + 1] : null;
-    const replaceAll = args.includes('--replace-all');
+    const { get, has } = parseCliArgs(process.argv);
+    const fileArg = get('file');
+    const replaceAll = has('replace-all');
+    const replaceRolls = has('replace-rolls');
     const filePath = fileArg
       ? path.resolve(__dirname, '..', fileArg)
       : path.resolve(__dirname, '..', 'JSONS', 'pgmarkwith_rollnumber.json');
     console.log(`Reading data from: ${filePath}\n`);
 
-    if (!fs.existsSync(filePath)) {
-      console.error(`❌ Error: File not found at ${filePath}`);
-      process.exit(1);
-    }
-
-    let raw = fs.readFileSync(filePath, 'utf8');
-    if (raw.charCodeAt(0) === 0xfeff) {
-      raw = raw.slice(1);
-    }
-    const rows = JSON.parse(raw);
+    const rows = readJsonFile(filePath);
 
     if (!Array.isArray(rows)) {
       console.error('❌ Error: JSON root must be an array of student rows');
@@ -77,6 +69,36 @@ async function uploadPGSecondSem2024() {
       console.log(`🗑️  --replace-all enabled: deleting existing docs in ${collectionName}...\n`);
       const del = await collection.deleteMany({});
       console.log(`🗑️  Removed previous rows from ${collectionName}: ${del.deletedCount}\n`);
+    }
+
+    if (replaceRolls) {
+      const autonomousRollNos = [];
+      const collegeRollNos = [];
+
+      for (const row of rows) {
+        const normalized = normalizeRow(row);
+        const autonomousRollNo =
+          normalized?.autonomousRollNo != null ? String(normalized.autonomousRollNo).trim() : '';
+        const collegeRollNo =
+          normalized?.collegeRollNo != null ? String(normalized.collegeRollNo).trim() : '';
+
+        if (autonomousRollNo) autonomousRollNos.push(autonomousRollNo);
+        else if (collegeRollNo) collegeRollNos.push(collegeRollNo);
+      }
+
+      const ors = [];
+      if (autonomousRollNos.length) ors.push({ autonomousRollNo: { $in: autonomousRollNos } });
+      if (collegeRollNos.length) ors.push({ collegeRollNo: { $in: collegeRollNos } });
+
+      if (ors.length) {
+        console.log(
+          `🗑️  --replace-rolls enabled: deleting existing docs for ${autonomousRollNos.length + collegeRollNos.length} roll(s) in ${collectionName}...\n`,
+        );
+        const del = await collection.deleteMany({ $or: ors });
+        console.log(`🗑️  Removed previous rows (matching rolls): ${del.deletedCount}\n`);
+      } else {
+        console.log('⚠️  --replace-rolls enabled but no roll keys found in input; skipping delete.\n');
+      }
     }
 
     const ops = [];
@@ -152,4 +174,6 @@ async function uploadPGSecondSem2024() {
   }
 }
 
-uploadPGSecondSem2024();
+if (require.main === module) {
+  uploadPGSecondSem2024();
+}

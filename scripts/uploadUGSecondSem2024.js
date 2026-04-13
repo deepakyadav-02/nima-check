@@ -1,16 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 
 const connectDB = require('../config/db');
 require('../models/UGSecondSem2024'); // ensure model is registered (and indexes)
+const { loadEnv } = require('../utils/loadEnv');
+const { parseCliArgs } = require('../utils/cliArgs');
+const { readJsonFile } = require('../utils/jsonFile');
 
 async function uploadUGSecondSem2024() {
   try {
-    // Prefer the app's environment (.env). Fallback to config.env for local setups.
-    dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
-    dotenv.config({ path: path.resolve(__dirname, '..', 'config.env') });
+    loadEnv(path.resolve(__dirname, '..'));
 
     if (!process.env.MONGO_URI) {
       console.error('❌ Error: MONGO_URI is missing. Set it in config.env');
@@ -20,22 +20,15 @@ async function uploadUGSecondSem2024() {
     await connectDB();
     console.log('Connected to database\n');
 
-    const args = process.argv.slice(2);
-    const fileFlagIndex = args.indexOf('--file');
-    const fileArg = fileFlagIndex !== -1 ? args[fileFlagIndex + 1] : null;
-    const replaceBba = args.includes('--replace-bba');
+    const { get, has } = parseCliArgs(process.argv);
+    const fileArg = get('file');
+    const replaceBba = has('replace-bba');
     const filePath = fileArg
       ? path.resolve(__dirname, '..', fileArg)
       : path.resolve(__dirname, '..', 'JSONS', 'finaljson2NDSEM-UG-with-grace.json');
     console.log(`Reading data from: ${filePath}\n`);
 
-    if (!fs.existsSync(filePath)) {
-      console.error(`❌ Error: File not found at ${filePath}`);
-      process.exit(1);
-    }
-
-    const raw = fs.readFileSync(filePath, 'utf8');
-    const rows = JSON.parse(raw);
+    const rows = readJsonFile(filePath);
 
     if (!Array.isArray(rows)) {
       console.error('❌ Error: JSON root must be an array of student rows');
@@ -129,5 +122,7 @@ async function uploadUGSecondSem2024() {
   }
 }
 
-uploadUGSecondSem2024();
+if (require.main === module) {
+  uploadUGSecondSem2024();
+}
 

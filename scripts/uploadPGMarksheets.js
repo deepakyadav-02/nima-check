@@ -1,23 +1,40 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
+// Prefer .env (Atlas) and fallback to config.env (local)
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 require('dotenv').config({ path: path.join(__dirname, '../config.env') });
 
 const PGStudent = require('../models/PGStudent');
 const UGMarksheet = require('../models/UGMarksheet');
 
+function parseArgs(argv) {
+  const args = argv.slice(2);
+  const get = (name) => {
+    const prefix = `--${name}=`;
+    const raw = args.find((a) => a.startsWith(prefix));
+    if (raw) return raw.slice(prefix.length);
+    const idx = args.indexOf(`--${name}`);
+    if (idx !== -1) return args[idx + 1];
+    return null;
+  };
+  const has = (name) => args.includes(`--${name}`);
+  return { args, get, has };
+}
+
 // Connect to MongoDB
 const connectDB = async () => {
   try {
     // Check for MONGO_URI in command line arguments first
-    const args = process.argv.slice(2);
-    const mongoUriArg = args.find(arg => arg.startsWith('--mongo-uri='))?.split('=')[1] || 
-                        (args.indexOf('--mongo-uri') !== -1 ? args[args.indexOf('--mongo-uri') + 1] : null);
+    const { get } = parseArgs(process.argv);
+    const mongoUriArg = get('mongo-uri');
     
     const mongoUri = mongoUriArg || process.env.MONGO_URI;
     if (!mongoUri) {
       console.error('Error: MONGO_URI not found in environment variables or command line arguments');
-      console.error('Usage: node uploadPGMarksheets.js [--mongo-uri=your_mongo_uri] [--file=path/to/file.json] [--skip-clear]');
+      console.error(
+        'Usage: node uploadPGMarksheets.js [--mongo-uri=your_mongo_uri] [--file=path/to/file.json] [--skip-clear] [--replace-rolls]'
+      );
       process.exit(1);
     }
     const conn = await mongoose.connect(mongoUri);
@@ -34,9 +51,8 @@ const uploadPGMarksheets = async () => {
     await connectDB();
 
     // Read pgMark_sheet.json
-    const args = process.argv.slice(2);
-    const fileArg = args.find(arg => arg.startsWith('--file='))?.split('=')[1] || 
-                    (args.indexOf('--file') !== -1 ? args[args.indexOf('--file') + 1] : null);
+    const { get, has } = parseArgs(process.argv);
+    const fileArg = get('file');
     
     const defaultFile = fileArg || path.join(__dirname, '../JSONS/pgMark_sheet.json');
     const pgMarksheetPath = path.resolve(defaultFile);
@@ -55,10 +71,41 @@ const uploadPGMarksheets = async () => {
     // Check if PG marksheets exist in database
     const existingPGMarksheets = await UGMarksheet.countDocuments({ studentType: 'PGStudent' });
     
-    const argsArray = process.argv.slice(2);
-    const skipClear = argsArray.includes('--skip-clear');
+    const skipClear = has('skip-clear');
+    const replaceRolls = has('replace-rolls');
     
-    if (existingPGMarksheets > 0 && !skipClear) {
+    if (replaceRolls) {
+      const rollNos = Array.from(
+        new Set(
+          pgMarksheetData
+            .map(
+              (m) =>
+                m.AutonomousRollNo ||
+                m.autonomousRollNo ||
+                m['Autonomous Roll No'] ||
+                null
+            )
+            .filter(Boolean)
+            .map((v) => String(v).trim())
+        )
+      );
+
+      console.log(
+        `\n🗑️  --replace-rolls enabled: deleting existing PG marksheets for ${rollNos.length} roll(s)...`
+      );
+
+      const students = await PGStudent.find({ 'Autonomous Roll No': { $in: rollNos } }).select('_id');
+      const studentIds = students.map((s) => s._id);
+
+      const deleteFilter = {
+        studentType: 'PGStudent',
+        semester: 1,
+        ...(studentIds.length > 0 ? { student: { $in: studentIds } } : {}),
+      };
+
+      const del = await UGMarksheet.deleteMany(deleteFilter);
+      console.log(`✅ Deleted ${del.deletedCount} PG semester-1 marksheets (by rolls)\n`);
+    } else if (existingPGMarksheets > 0 && !skipClear) {
       console.log(`\n📊 Found ${existingPGMarksheets} existing PG marksheets in database`);
       console.log('🧹 Deleting existing PG marksheets (UG and BBA marksheets will be preserved)...');
       
