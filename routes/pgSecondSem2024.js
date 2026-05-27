@@ -19,6 +19,7 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
       .findOne({
         $or: [
           { autonomousRollNo },
+          { 'Autonomous Roll No': autonomousRollNo },
           { collegeRollNo: autonomousRollNo },
           { 'College Roll No': autonomousRollNo },
           { 'College Roll Number': autonomousRollNo },

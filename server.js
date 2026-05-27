@@ -26,6 +26,9 @@ app.use('/api/marksheet', require('./routes/marksheet'));
 app.use('/api/abc-id', require('./routes/abcId'));
 app.use('/api/ug-2ndsem2024', require('./routes/ugSecondSem2024'));
 app.use('/api/pg-2ndsem2024', require('./routes/pgSecondSem2024'));
+app.use('/api/pg-sem3', require('./routes/pgSem3'));
+app.use('/api/pg-sem4', require('./routes/pgSem4'));
+app.use('/api/pg/all-semesters', require('./routes/pgAllSemesters'));
 
 // Health check route
 app.get('/health', (req, res) => {
@@ -48,7 +51,10 @@ app.get('/', (req, res) => {
       marksheet: '/api/marksheet',
       abcId: '/api/abc-id',
       ug2ndsem2024: '/api/ug-2ndsem2024',
-      pg2ndsem2024: '/api/pg-2ndsem2024'
+      pg2ndsem2024: '/api/pg-2ndsem2024',
+      pgSem3: '/api/pg-sem3',
+      pgSem4: '/api/pg-sem4',
+      pgAllSemesters: '/api/pg/all-semesters'
     }
   });
 });
