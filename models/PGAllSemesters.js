@@ -39,6 +39,11 @@ const PGAllSemestersSchema = new mongoose.Schema(
       trim: true,
     },
     rollNo: { type: String, default: '' },
+    /**
+     * Serial number printed on QR-enabled final grade sheet (used in verify URL).
+     * New format (2026): 9 digits, starts with "2026" (e.g. 202612847).
+     */
+    gradeSheetSlNo: { type: String, default: '' },
     /** College registration number (REGD NO), e.g. 6072/24 */
     registrationNumber: { type: String, default: '' },
     studentName: { type: String, default: '' },
@@ -74,6 +79,8 @@ const PGAllSemestersSchema = new mongoose.Schema(
 PGAllSemestersSchema.index({ autonomousRollNo: 1 }, { unique: true });
 PGAllSemestersSchema.index({ rollNo: 1 });
 PGAllSemestersSchema.index({ department: 1 });
+// Allow quick lookup from QR verify page; sparse so old docs without value don't block indexing.
+PGAllSemestersSchema.index({ gradeSheetSlNo: 1 }, { unique: true, sparse: true });
 
 /** Semesters that have at least one subject saved */
 PGAllSemestersSchema.methods.getAvailableSemesters = function getAvailableSemesters() {

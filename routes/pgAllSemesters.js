@@ -7,6 +7,8 @@ const rollFilter = (autonomousRollNo) => ({
   autonomousRollNo: autonomousRollNo.trim(),
 });
 
+const isValid2026SlNo = (value) => /^2026\d{5}$/.test(String(value || '').trim());
+
 // @route   GET /api/pg/all-semesters/autonomous/:autonomousRollNo
 // @desc    Get all 4 PG semesters + overall grand total (sem1+sem2+sem3+sem4)
 router.get('/autonomous/:autonomousRollNo', async (req, res) => {
@@ -23,6 +25,34 @@ router.get('/autonomous/:autonomousRollNo', async (req, res) => {
     }
 
     return res.json(enrichPGAllSemestersDoc(result));
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/pg/all-semesters/verify/:slNo
+// @desc    Public verify endpoint for QR codes on final grade sheets
+// @access  Public
+router.get('/verify/:slNo', async (req, res) => {
+  try {
+    const slNo = req.params.slNo?.trim();
+    if (!isValid2026SlNo(slNo)) {
+      return res.status(400).json({ message: 'Invalid serial number' });
+    }
+
+    const doc = await PGAllSemesters.findOne({ gradeSheetSlNo: slNo });
+    if (!doc) {
+      return res.status(404).json({ message: 'No record matches this serial number' });
+    }
+
+    const enriched = enrichPGAllSemestersDoc(doc);
+    return res.json({
+      gradeSheetSlNo: enriched.gradeSheetSlNo || slNo,
+      studentName: enriched.studentName || '',
+      rollNo: enriched.rollNo || enriched.autonomousRollNo || '',
+      grandTotal: enriched.grandTotal ?? null,
+    });
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({ message: 'Server error' });
