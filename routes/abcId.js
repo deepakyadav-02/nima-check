@@ -8,28 +8,12 @@ const BBAStudent = require('../models/BBAStudent');
 const UGFirstSem2025 = require('../models/UGFirstSem2025');
 const PGFirstSem2025 = require('../models/PGFirstSem2025');
 const ABCIDSubmission = require('../models/ABCIDSubmission');
+const { getStudentModel: getSharedStudentModel } = require('../utils/studentLookup');
 
-// Helper function to get student model based on type
-const getStudentModel = (studentType) => {
-  switch (studentType) {
-    case 'UG':
-      return UGStudent;
-    case 'PG':
-      return PGStudent;
-    case 'BBA':
-      return BBAStudent;
-    case 'UG2025':
-      return UGFirstSem2025;
-    case 'PG2025':
-      return PGFirstSem2025;
-    default:
-      return null;
-  }
-};
+const getStudentModel = (studentType) => getSharedStudentModel(studentType);
 
-// Helper function to get model name for mongoose ref
 const getModelName = (studentType) => {
-  switch (studentType) {
+  switch (studentType?.toUpperCase()) {
     case 'UG':
       return 'UGStudent';
     case 'PG':
@@ -40,6 +24,10 @@ const getModelName = (studentType) => {
       return 'UGFirstSem2025';
     case 'PG2025':
       return 'PGFirstSem2025';
+    case 'UG2ND2025':
+      return 'UGSecondSem2025';
+    case 'UG4TH2024':
+      return 'UGFourthSem2024';
     default:
       return null;
   }

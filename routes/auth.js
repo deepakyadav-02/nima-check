@@ -2,16 +2,24 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
-const UGStudent = require('../models/UGStudent');
-const PGStudent = require('../models/PGStudent');
-const BBAStudent = require('../models/BBAStudent');
-const UGFirstSem2025 = require('../models/UGFirstSem2025');
-const PGFirstSem2025 = require('../models/PGFirstSem2025');
+const { findStudentByRoll, enrichStudentRecord } = require('../utils/studentLookup');
 
 // Admin credentials (in production, use a proper Admin model with hashed passwords)
 const ADMIN_CREDENTIALS = {
   username: process.env.ADMIN_USERNAME || 'admin',
   password: process.env.ADMIN_PASSWORD || 'admin123'
+};
+
+const getStoredDob = (student) => {
+  const value = student?.dob ?? student?.DOB;
+  if (value === undefined || value === null) return '';
+  return String(value).trim();
+};
+
+const dobMatches = (student, trimmedDob) => {
+  const storedDob = getStoredDob(student);
+  if (!storedDob) return true;
+  return storedDob === trimmedDob;
 };
 
 // @route   POST /api/auth/login
@@ -42,102 +50,35 @@ router.post('/login', [
 
     console.log('Login attempt:', { rollNo: trimmedRollNo, dob: trimmedDob });
 
-    // Build query conditions for each model that check all possible roll number fields
-    // For UGStudent: check "Autonomous Roll No" OR "Roll No"
-    const ugQuery = {
-      $or: [
-        { "Autonomous Roll No": trimmedRollNo },
-        { "Roll No": trimmedRollNo }
-      ],
-      dob: trimmedDob
-    };
-
-    // For PGStudent: check "Autonomous Roll No" OR "College Roll No"
-    const pgQuery = {
-      $or: [
-        { "Autonomous Roll No": trimmedRollNo },
-        { "College Roll No": trimmedRollNo }
-      ],
-      "DOB": trimmedDob
-    };
-
-    // For BBAStudent: check "Autonomous Roll No" OR "Roll No"
-    const bbaQuery = {
-      $or: [
-        { "Autonomous Roll No": trimmedRollNo },
-        { "Roll No": trimmedRollNo }
-      ],
-      dob: trimmedDob
-    };
-
-    // For UGFirstSem2025: check "Autonomous Roll No" OR "Roll No" (no DOB check - default DOB)
-    const ugFirstSem2025Query = {
-      $or: [
-        { "Autonomous Roll No": trimmedRollNo },
-        { "Roll No": trimmedRollNo }
-      ]
-    };
-
-    // For PGFirstSem2025: check "Autonomous Roll No" OR "College Roll No" (no DOB check - default DOB)
-    const pgFirstSem2025Query = {
-      $or: [
-        { "Autonomous Roll No": trimmedRollNo },
-        { "College Roll No": trimmedRollNo }
-      ]
-    };
-
-    // Check in all five models and find the best match
-    const [ugStudent, pgStudent, bbaStudent, ugFirstSem2025, pgFirstSem2025] = await Promise.all([
-      UGStudent.findOne(ugQuery),
-      PGStudent.findOne(pgQuery),
-      BBAStudent.findOne(bbaQuery),
-      UGFirstSem2025.findOne(ugFirstSem2025Query),
-      PGFirstSem2025.findOne(pgFirstSem2025Query)
-    ]);
+    const { student, studentType } = await findStudentByRoll(trimmedRollNo);
+    const studentRecord = student ? await enrichStudentRecord(student) : null;
 
     console.log('Query results:', {
-      ugStudent: !!ugStudent,
-      pgStudent: !!pgStudent,
-      bbaStudent: !!bbaStudent,
-      ugFirstSem2025: !!ugFirstSem2025,
-      pgFirstSem2025: !!pgFirstSem2025
+      found: !!studentRecord,
+      studentType,
+      storedDob: studentRecord ? getStoredDob(studentRecord) : null,
     });
 
-    let student = null;
-    let studentType = null;
-
-    // Determine the correct student type based on priority: BBA > PG > PGFirstSem2025 > UG > UGFirstSem2025
-    if (bbaStudent && (bbaStudent["Department"] === "BBA " || bbaStudent["Roll No"]?.startsWith("BBA-"))) {
-      student = bbaStudent;
-      studentType = 'BBA';
-    } else if (pgStudent && (pgStudent["Course"] || pgStudent["Graduation Board"])) {
-      student = pgStudent;
-      studentType = 'PG';
-    } else if (pgFirstSem2025) {
-      student = pgFirstSem2025;
-      studentType = 'PG2025';
-    } else if (ugStudent) {
-      student = ugStudent;
-      studentType = 'UG';
-    } else if (ugFirstSem2025) {
-      student = ugFirstSem2025;
-      studentType = 'UG2025';
+    if (!studentRecord) {
+      return res.status(400).json({ message: 'Invalid credentials. Roll number not found.' });
     }
 
-    if (!student) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+    if (!dobMatches(studentRecord, trimmedDob)) {
+      return res.status(400).json({
+        message: 'Invalid credentials. Date of birth does not match our records.',
+      });
     }
 
     // Get the actual autonomous roll no from the student record for JWT payload
-    const autonomousRollNo = student["Autonomous Roll No"] || trimmedRollNo;
+    const autonomousRollNo = studentRecord["Autonomous Roll No"] || trimmedRollNo;
 
     // Create JWT payload
     const payload = {
       user: {
-        id: student._id,
+        id: studentRecord._id,
         autonomousRollNo: autonomousRollNo,
         studentType: studentType,
-        name: student["Name of the Students"] || student["Applicant Name"] || student["Name"]
+        name: studentRecord["Name of the Students"] || studentRecord["Applicant Name"] || studentRecord["Name"]
       }
     };
 

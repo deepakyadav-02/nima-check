@@ -98,6 +98,21 @@ const UGFirstSem2025Schema = new mongoose.Schema({
     type: String,
     required: false,
     default: "2025"
+  },
+  feeYearLevel: {
+    type: String,
+    enum: ['2', '3'],
+    required: false
+  },
+  feeStream: {
+    type: String,
+    enum: ['arts', 'science', 'commerce'],
+    required: false
+  },
+  feeCategory: {
+    type: String,
+    enum: ['boys', 'girls', 'scStPh'],
+    required: false
   }
 }, {
   timestamps: false
