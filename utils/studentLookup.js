@@ -3,9 +3,10 @@ const PGStudent = require('../models/PGStudent');
 const BBAStudent = require('../models/BBAStudent');
 const UGFirstSem2025 = require('../models/UGFirstSem2025');
 const PGFirstSem2025 = require('../models/PGFirstSem2025');
+const PGSecondSem2025 = require('../models/PGSecondSem2025');
 const { UGSecondSem2025, UGFourthSem2024 } = require('../models/SemesterJsonCollections');
 
-const SEMESTER_STUDENT_TYPES = ['UG2ND2025', 'UG4TH2024'];
+const SEMESTER_STUDENT_TYPES = ['UG2ND2025', 'UG4TH2024', 'PG2ND2025'];
 
 const rollNumberQuery = (trimmedRollNo) => ({
   $or: [
@@ -58,6 +59,8 @@ const getStudentModel = (studentType) => {
       return UGSecondSem2025;
     case 'UG4TH2024':
       return UGFourthSem2024;
+    case 'PG2ND2025':
+      return PGSecondSem2025;
     default:
       return null;
   }
@@ -152,6 +155,7 @@ const resolveStudentMatch = ({
   bbaStudent,
   pgStudent,
   pgFirstSem2025,
+  pgSecondSem2025,
   ug2nd2025,
   ug4th2024,
   ugStudent,
@@ -165,6 +169,9 @@ const resolveStudentMatch = ({
   }
   if (pgFirstSem2025) {
     return { student: pgFirstSem2025, studentType: 'PG2025' };
+  }
+  if (pgSecondSem2025) {
+    return { student: pgSecondSem2025, studentType: 'PG2ND2025' };
   }
   if (ug2nd2025) {
     return { student: ug2nd2025, studentType: 'UG2ND2025' };
@@ -190,6 +197,7 @@ const findStudentByRoll = async (trimmedRollNo) => {
     bbaStudent,
     ugFirstSem2025,
     pgFirstSem2025,
+    pgSecondSem2025,
     ug2nd2025,
     ug4th2024,
   ] = await Promise.all([
@@ -198,6 +206,7 @@ const findStudentByRoll = async (trimmedRollNo) => {
     BBAStudent.findOne(query),
     UGFirstSem2025.findOne(query),
     PGFirstSem2025.findOne(query),
+    PGSecondSem2025.findOne(query),
     UGSecondSem2025.findOne(query),
     UGFourthSem2024.findOne(query),
   ]);
@@ -206,6 +215,7 @@ const findStudentByRoll = async (trimmedRollNo) => {
     bbaStudent,
     pgStudent,
     pgFirstSem2025,
+    pgSecondSem2025,
     ug2nd2025,
     ug4th2024,
     ugStudent,
@@ -231,6 +241,7 @@ const findStudentRecord = async (autonomousRollNo, studentType) => {
     bbaStudent,
     ugFirstSem2025,
     pgFirstSem2025,
+    pgSecondSem2025,
     ug2nd2025,
     ug4th2024,
   ] = await Promise.all([
@@ -239,6 +250,7 @@ const findStudentRecord = async (autonomousRollNo, studentType) => {
     BBAStudent.findOne({ 'Autonomous Roll No': autonomousRollNo }),
     UGFirstSem2025.findOne({ 'Autonomous Roll No': autonomousRollNo }),
     PGFirstSem2025.findOne({ 'Autonomous Roll No': autonomousRollNo }),
+    PGSecondSem2025.findOne({ 'Autonomous Roll No': autonomousRollNo }),
     UGSecondSem2025.findOne({ 'Autonomous Roll No': autonomousRollNo }),
     UGFourthSem2024.findOne({ 'Autonomous Roll No': autonomousRollNo }),
   ]);
@@ -247,6 +259,7 @@ const findStudentRecord = async (autonomousRollNo, studentType) => {
     bbaStudent,
     pgStudent,
     pgFirstSem2025,
+    pgSecondSem2025,
     ug2nd2025,
     ug4th2024,
     ugStudent,

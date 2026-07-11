@@ -4,7 +4,21 @@ const BBAStudent = require('../models/BBAStudent');
 const UGFirstSem2025 = require('../models/UGFirstSem2025');
 const UGSecondSem2024 = require('../models/UGSecondSem2024');
 const { UGSecondSem2025, UGFourthSem2024 } = require('../models/SemesterJsonCollections');
+const PGFirstSem2025 = require('../models/PGFirstSem2025');
+const PGSecondSem2025 = require('../models/PGSecondSem2025');
 const { rollNumberQuery, formatAdmitCardData } = require('./studentLookup');
+
+const getPg2ndSem2025LayoutKey = (student) => {
+  const dept = String(student?.Department || '').trim().toUpperCase();
+  if (dept === 'CHEMISTRY') return 'pg2ndsem2025-chemistry';
+  if (dept === 'COMMERCE')  return 'pg2ndsem2025-commerce';
+  if (dept === 'GEOLOGY')   return 'pg2ndsem2025-geology';
+  if (dept === 'MATH')      return 'pg2ndsem2025-math';
+  if (dept === 'ODIA')      return 'pg2ndsem2025-odia';
+  return 'pg2ndsem2025-mfc'; // MFC students: no Department, Stream=COMMERCE
+};
+
+const ALL_PG2ND2025_FIELDS = ['CH-408', 'PAPER-2.1', 'MTC-201', 'PAPER-1.1'];
 
 const isBbaStudent = (student) => {
   const dept = String(student?.Department || '').trim().toUpperCase();
@@ -67,6 +81,18 @@ const SUBJECT_LAYOUTS = {
   ],
   '3rdsem-bba': ['CC-301', 'CC-302', 'CC-303', 'MDE-301', 'SEC-301', 'VAC-301'],
   '4thsem2024-ug': ['CORE-1 MAJOR-8', 'CORE-1 MAJOR-9', 'CORE-1 MAJOR-10', 'CORE-2 MINOR-4'],
+
+  // PG 1st Semester 2025
+  'pg1stsem2025-paper': ['PAPER-1.1', 'PAPER-1.2', 'PAPER-1.3', 'PAPER-1.4', 'PAPER-1.5', 'PAPER-1.6', 'PAPER-1.7'],
+  'pg1stsem2025-mtc':   ['PAPER-MTC-101', 'PAPER-MTC-102', 'PAPER-MTC-103', 'PAPER-MTC-104', 'PAPER-MTC-105'],
+
+  // PG 2nd Semester 2025 — one layout per department
+  'pg2ndsem2025-chemistry': ['CH-408', 'CH-409', 'CH-410', 'CH-411', 'CH-412', 'CH-413', 'CH-414'],
+  'pg2ndsem2025-commerce':  ['PAPER-2.1', 'PAPER-2.2', 'PAPER-2.3', 'PAPER-2.4', 'PAPER-2.5', 'PAPER-2.6'],
+  'pg2ndsem2025-geology':   ['PAPER-2.1', 'PAPER-2.2', 'PAPER-2.3', 'PAPER-2.4', 'PAPER-2.5'],
+  'pg2ndsem2025-math':      ['MTC-201', 'MTC-202', 'MTC-203', 'MTC-204', 'MTC-205'],
+  'pg2ndsem2025-odia':      ['PAPER-2.1', 'PAPER-2.2', 'PAPER-2.3', 'PAPER-2.4'],
+  'pg2ndsem2025-mfc':       ['PAPER-1.1', 'PAPER-1.2', 'PAPER-1.3', 'PAPER-1.4', 'PAPER-1.5', 'PAPER-1.6', 'PAPER-1.7', 'PAPER-1.8'],
 };
 
 const SUBJECT_FIELD_LABELS = {
@@ -134,6 +160,45 @@ const SUBJECT_FIELD_LABELS = {
     'CORE-1 MAJOR-10': 'Major CP-10',
     'CORE-2 MINOR-4': 'Minor P-4',
   },
+
+  // PG 1st Semester 2025
+  'pg1stsem2025-paper': {
+    'PAPER-1.1': 'PAPER-1.1', 'PAPER-1.2': 'PAPER-1.2', 'PAPER-1.3': 'PAPER-1.3',
+    'PAPER-1.4': 'PAPER-1.4', 'PAPER-1.5': 'PAPER-1.5', 'PAPER-1.6': 'PAPER-1.6',
+    'PAPER-1.7': 'PAPER-1.7',
+  },
+  'pg1stsem2025-mtc': {
+    'PAPER-MTC-101': 'PAPER-MTC-101', 'PAPER-MTC-102': 'PAPER-MTC-102',
+    'PAPER-MTC-103': 'PAPER-MTC-103', 'PAPER-MTC-104': 'PAPER-MTC-104',
+    'PAPER-MTC-105': 'PAPER-MTC-105',
+  },
+
+  // PG 2nd Semester 2025
+  'pg2ndsem2025-chemistry': {
+    'CH-408': 'CH-408', 'CH-409': 'CH-409', 'CH-410': 'CH-410',
+    'CH-411': 'CH-411', 'CH-412': 'CH-412', 'CH-413': 'CH-413', 'CH-414': 'CH-414',
+  },
+  'pg2ndsem2025-commerce': {
+    'PAPER-2.1': 'PAPER-2.1', 'PAPER-2.2': 'PAPER-2.2', 'PAPER-2.3': 'PAPER-2.3',
+    'PAPER-2.4': 'PAPER-2.4', 'PAPER-2.5': 'PAPER-2.5', 'PAPER-2.6': 'PAPER-2.6',
+  },
+  'pg2ndsem2025-geology': {
+    'PAPER-2.1': 'PAPER-2.1', 'PAPER-2.2': 'PAPER-2.2', 'PAPER-2.3': 'PAPER-2.3',
+    'PAPER-2.4': 'PAPER-2.4', 'PAPER-2.5': 'PAPER-2.5',
+  },
+  'pg2ndsem2025-math': {
+    'MTC-201': 'MTC-201', 'MTC-202': 'MTC-202', 'MTC-203': 'MTC-203',
+    'MTC-204': 'MTC-204', 'MTC-205': 'MTC-205',
+  },
+  'pg2ndsem2025-odia': {
+    'PAPER-2.1': 'PAPER-2.1', 'PAPER-2.2': 'PAPER-2.2',
+    'PAPER-2.3': 'PAPER-2.3', 'PAPER-2.4': 'PAPER-2.4',
+  },
+  'pg2ndsem2025-mfc': {
+    'PAPER-1.1': 'PAPER-1.1', 'PAPER-1.2': 'PAPER-1.2', 'PAPER-1.3': 'PAPER-1.3',
+    'PAPER-1.4': 'PAPER-1.4', 'PAPER-1.5': 'PAPER-1.5', 'PAPER-1.6': 'PAPER-1.6',
+    'PAPER-1.7': 'PAPER-1.7', 'PAPER-1.8': 'PAPER-1.8',
+  },
 };
 
 const SEMESTER_SOURCES = [
@@ -192,6 +257,26 @@ const SEMESTER_SOURCES = [
     layoutKey: () => '4thsem2024-ug',
     detect: (student) => hasAnyField(student, SUBJECT_LAYOUTS['4thsem2024-ug']),
   },
+  {
+    key: 'pg1stsem2025',
+    label: '1st Semester',
+    order: 1,
+    studentType: 'PG2025',
+    fetch: (query) => PGFirstSem2025.findOne(query),
+    layoutKey: (student) =>
+      student?.['PAPER-MTC-101'] ? 'pg1stsem2025-mtc' : 'pg1stsem2025-paper',
+    detect: (student) =>
+      hasAnyField(student, ['PAPER-1.1', 'PAPER-MTC-101']),
+  },
+  {
+    key: 'pg2ndsem2025',
+    label: '2nd Semester',
+    order: 2,
+    studentType: 'PG2ND2025',
+    fetch: (query) => PGSecondSem2025.findOne(query),
+    layoutKey: (student) => getPg2ndSem2025LayoutKey(student),
+    detect: (student) => hasAnyField(student, ALL_PG2ND2025_FIELDS),
+  },
 ];
 
 const STUDENT_TYPE_DEFAULT_SEMESTER = {
@@ -201,6 +286,8 @@ const STUDENT_TYPE_DEFAULT_SEMESTER = {
   UG: '3rdsem',
   UG4TH2024: '4thsem2024',
   BBA: '3rdsem',
+  PG2025: 'pg1stsem2025',
+  PG2ND2025: 'pg2ndsem2025',
 };
 
 const resolveFieldValue = (student, field) => {
