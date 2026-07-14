@@ -21,12 +21,27 @@ const inferBatchFromStudent = (student) => {
 
   const roll = String(
     student?.['Autonomous Roll No'] || student?.['Roll No'] || student?.['College Roll No'] || ''
-  ).trim();
+  ).trim().toUpperCase();
 
-  const nacMatch = roll.match(/NAC(\d{2})/i);
-  if (nacMatch) return `20${nacMatch[1]}`;
+  // UG/BBA pattern: NAC + course letters + 2-digit batch + digits
+  // e.g. NACBCA25015 → 2025, NACBCA24015 → 2024
+  const ugMatch = roll.match(/^NAC[A-Z]+(\d{2})\d+/);
+  if (ugMatch) return `20${ugMatch[1]}`;
 
-  const collegeMatch = roll.match(/[A-Za-z]+-?(\d{2})-/);
+  // PG pattern: digits + NAC (e.g. 111NAC25001) → 2025
+  const pgMatch = roll.match(/^\d+NAC(\d{2})/i);
+  if (pgMatch) return `20${pgMatch[1]}`;
+
+  // BBA separate pattern: BBA-24-001 or BBA-25-001
+  const bbaMatch = roll.match(/^BBA-(\d{2})-/);
+  if (bbaMatch) return `20${bbaMatch[1]}`;
+
+  // Fallback: any NAC followed by 2 digits anywhere
+  const nacFallback = roll.match(/NAC(\d{2})/i);
+  if (nacFallback) return `20${nacFallback[1]}`;
+
+  // Generic college roll: letters-digits-rest (e.g. COM-24-001)
+  const collegeMatch = roll.match(/[A-Z]+-?(\d{2})-/);
   if (collegeMatch) return `20${collegeMatch[1]}`;
 
   return null;

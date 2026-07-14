@@ -8,6 +8,33 @@ const PGFirstSem2025 = require('../models/PGFirstSem2025');
 const PGSecondSem2025 = require('../models/PGSecondSem2025');
 const { rollNumberQuery, formatAdmitCardData } = require('./studentLookup');
 
+/**
+ * Extracts the 2-digit batch code from a roll number.
+ * NACBCA25015  → '25' (2025 batch UG)
+ * NACBCA24015  → '24' (2024 batch UG)
+ * 111NAC...    → 'pg' (PG students)
+ * NACMFC...    → 'pg'
+ */
+const extractBatchCodeFromRollNo = (rollNo) => {
+  const roll = String(rollNo || '').trim().toUpperCase();
+
+  // PG students: roll starts with digits then NAC (e.g. 111NAC, 153NAC, 155NAC)
+  if (/^\d+NAC/i.test(roll)) return 'pg';
+  // PG MFC students
+  if (roll.startsWith('NACMFC')) return 'pg';
+
+  // UG/BBA pattern: NAC + course letters + 2-digit batch + digits
+  // e.g. NACBCA25015, NACBBA25001, NACCOM24010
+  const ugMatch = roll.match(/^NAC[A-Z]+(\d{2})\d+/);
+  if (ugMatch) return ugMatch[1]; // '25' or '24'
+
+  // Standalone BBA pattern: BBA-24-001 or BBA-25-001
+  const bbaMatch = roll.match(/^BBA-(\d{2})-/);
+  if (bbaMatch) return bbaMatch[1];
+
+  return null;
+};
+
 const getPg2ndSem2025LayoutKey = (student) => {
   const dept = String(student?.Department || '').trim().toUpperCase();
   if (dept === 'CHEMISTRY') return 'pg2ndsem2025-chemistry';
@@ -206,6 +233,7 @@ const SEMESTER_SOURCES = [
     key: '1stsem2025',
     label: '1st Semester',
     order: 1,
+    batchCode: '25',
     studentType: 'UG2025',
     fetch: (query) => UGFirstSem2025.findOne(query),
     layoutKey: (student) => (isBbaStudent(student) ? '1stsem2025-bba' : '1stsem2025-ug'),
@@ -215,6 +243,7 @@ const SEMESTER_SOURCES = [
     key: '2ndsem2025',
     label: '2nd Semester (2025 Batch)',
     order: 2,
+    batchCode: '25',
     studentType: 'UG2ND2025',
     fetch: (query) => UGSecondSem2025.findOne(query),
     layoutKey: () => '2ndsem2025-ug',
@@ -224,6 +253,7 @@ const SEMESTER_SOURCES = [
     key: '2ndsem2024',
     label: '2nd Semester (2024 Batch)',
     order: 2,
+    batchCode: '24',
     studentType: 'UG2ND2024',
     fetch: (query) => UGSecondSem2024.findOne(query),
     layoutKey: (student) => (isBbaStudent(student) ? '2ndsem2024-bba' : '2ndsem2024-ug'),
@@ -235,6 +265,7 @@ const SEMESTER_SOURCES = [
     key: '3rdsem',
     label: '3rd Semester',
     order: 3,
+    batchCode: '24',
     studentType: 'UG',
     fetch: async (query) => {
       const bba = await BBAStudent.findOne(query);
@@ -252,6 +283,7 @@ const SEMESTER_SOURCES = [
     key: '4thsem2024',
     label: '4th Semester (2024 Batch)',
     order: 4,
+    batchCode: '24',
     studentType: 'UG4TH2024',
     fetch: (query) => UGFourthSem2024.findOne(query),
     layoutKey: () => '4thsem2024-ug',
@@ -261,6 +293,7 @@ const SEMESTER_SOURCES = [
     key: 'pg1stsem2025',
     label: '1st Semester',
     order: 1,
+    batchCode: 'pg',
     studentType: 'PG2025',
     fetch: (query) => PGFirstSem2025.findOne(query),
     layoutKey: (student) =>
@@ -272,6 +305,7 @@ const SEMESTER_SOURCES = [
     key: 'pg2ndsem2025',
     label: '2nd Semester',
     order: 2,
+    batchCode: 'pg',
     studentType: 'PG2ND2025',
     fetch: (query) => PGSecondSem2025.findOne(query),
     layoutKey: (student) => getPg2ndSem2025LayoutKey(student),
@@ -311,10 +345,15 @@ const buildSubjectRows = (student, layoutKey) => {
 };
 
 const listAvailableSemesters = async (autonomousRollNo) => {
-  const query = rollNumberQuery(autonomousRollNo.trim());
+  const trimmed = autonomousRollNo.trim();
+  const query = rollNumberQuery(trimmed);
+  const studentBatchCode = extractBatchCodeFromRollNo(trimmed);
   const available = [];
 
   for (const source of SEMESTER_SOURCES) {
+    // Only query sources that match this student's batch
+    if (studentBatchCode && source.batchCode !== studentBatchCode) continue;
+
     const student = await source.fetch(query);
     if (!student) continue;
 
