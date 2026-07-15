@@ -28,9 +28,9 @@ const inferBatchFromStudent = (student) => {
   const ugMatch = roll.match(/^NAC[A-Z]+(\d{2})\d+/);
   if (ugMatch) return `20${ugMatch[1]}`;
 
-  // PG pattern: digits + NAC (e.g. 111NAC25001) → 2025
-  const pgMatch = roll.match(/^\d+NAC(\d{2})/i);
-  if (pgMatch) return `20${pgMatch[1]}`;
+  // UG with 2-digit college code: 03NAC25001 → 2025
+  const ugCollegeFirst = roll.match(/^\d{2}NAC(\d{2})/);
+  if (ugCollegeFirst) return `20${ugCollegeFirst[1]}`;
 
   // BBA separate pattern: BBA-24-001 or BBA-25-001
   const bbaMatch = roll.match(/^BBA-(\d{2})-/);

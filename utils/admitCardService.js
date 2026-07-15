@@ -10,23 +10,35 @@ const { rollNumberQuery, formatAdmitCardData } = require('./studentLookup');
 
 /**
  * Extracts the 2-digit batch code from a roll number.
- * NACBCA25015  → '25' (2025 batch UG)
- * NACBCA24015  → '24' (2024 batch UG)
- * 111NAC...    → 'pg' (PG students)
- * NACMFC...    → 'pg'
+ *
+ * UG formats:
+ *   NACBCA25015  → '25'   (NAC + course letters + batch + number)
+ *   03NAC25001   → '25'   (2-digit college code + NAC + batch + number)
+ *   NACBBA24-001 → '24'   (BBA with dash separator)
+ *   BBA-24-001   → '24'   (standalone BBA format)
+ *
+ * PG formats (specific 3-digit institute codes):
+ *   111NAC25001, 153NAC25001, 155NAC..., 156NAC..., 181NAC... → 'pg'
+ *   NACMFC... → 'pg'
  */
 const extractBatchCodeFromRollNo = (rollNo) => {
   const roll = String(rollNo || '').trim().toUpperCase();
 
-  // PG students: roll starts with digits then NAC (e.g. 111NAC, 153NAC, 155NAC)
-  if (/^\d+NAC/i.test(roll)) return 'pg';
-  // PG MFC students
-  if (roll.startsWith('NACMFC')) return 'pg';
+  // PG students: identified by specific 3-digit institute codes before NAC
+  if (
+    roll.includes('111NAC') || roll.includes('153NAC') || roll.includes('155NAC') ||
+    roll.includes('156NAC') || roll.includes('181NAC') || roll.startsWith('NACMFC')
+  ) return 'pg';
 
-  // UG/BBA pattern: NAC + course letters + 2-digit batch + digits
-  // e.g. NACBCA25015, NACBBA25001, NACCOM24010
-  const ugMatch = roll.match(/^NAC[A-Z]+(\d{2})\d+/);
-  if (ugMatch) return ugMatch[1]; // '25' or '24'
+  // UG format 1: NAC + course letters + 2-digit batch + digits
+  // e.g. NACBCA25015, NACBBA24001
+  const ugNacFirst = roll.match(/^NAC[A-Z]+(\d{2})/);
+  if (ugNacFirst) return ugNacFirst[1];
+
+  // UG format 2: 2-digit college code + NAC + 2-digit batch + digits
+  // e.g. 03NAC25001, 03NAC24001
+  const ugCollegeFirst = roll.match(/^\d{2}NAC(\d{2})/);
+  if (ugCollegeFirst) return ugCollegeFirst[1];
 
   // Standalone BBA pattern: BBA-24-001 or BBA-25-001
   const bbaMatch = roll.match(/^BBA-(\d{2})-/);
