@@ -24,10 +24,14 @@ const getModelName = (studentType) => {
       return 'UGFirstSem2025';
     case 'PG2025':
       return 'PGFirstSem2025';
+    case 'UG2ND2024':
+      return 'UGSecondSem2024';
     case 'UG2ND2025':
       return 'UGSecondSem2025';
     case 'UG4TH2024':
       return 'UGFourthSem2024';
+    case 'PG2ND2025':
+      return 'PGSecondSem2025';
     default:
       return null;
   }

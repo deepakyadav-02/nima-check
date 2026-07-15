@@ -2,9 +2,11 @@ const UGStudent = require('../models/UGStudent');
 const PGStudent = require('../models/PGStudent');
 const BBAStudent = require('../models/BBAStudent');
 const UGFirstSem2025 = require('../models/UGFirstSem2025');
+const UGSecondSem2024 = require('../models/UGSecondSem2024');
 const PGFirstSem2025 = require('../models/PGFirstSem2025');
 const PGSecondSem2025 = require('../models/PGSecondSem2025');
 const { UGSecondSem2025, UGFourthSem2024 } = require('../models/SemesterJsonCollections');
+const ABCIDSubmission = require('../models/ABCIDSubmission');
 
 const SEMESTER_STUDENT_TYPES = ['UG2ND2025', 'UG4TH2024', 'PG2ND2025'];
 
@@ -70,6 +72,8 @@ const getStudentModel = (studentType) => {
       return UGFirstSem2025;
     case 'PG2025':
       return PGFirstSem2025;
+    case 'UG2ND2024':
+      return UGSecondSem2024;
     case 'UG2ND2025':
       return UGSecondSem2025;
     case 'UG4TH2024':
@@ -123,9 +127,15 @@ const mergeProfileFields = async (studentData) => {
   const ugRecord = await UGStudent.findOne({ 'Autonomous Roll No': autonomousRollNo });
   const firstSemRecord = needsDob ? await findFirstSem2025BySecondSem(studentData) : null;
 
+  // ABCIDSubmission is the universal source of truth — covers all student types
+  // including those not in UGStudent (2025 batch, 4th sem 2024, etc.)
+  const abcSubmission = needsAbc && !ugRecord?.ABC_ID
+    ? await ABCIDSubmission.findOne({ autonomousRollNo })
+    : null;
+
   return {
     ...studentData,
-    ABC_ID: studentData.ABC_ID || ugRecord?.ABC_ID || null,
+    ABC_ID: studentData.ABC_ID || ugRecord?.ABC_ID || abcSubmission?.ABC_ID || null,
     profileImage: studentData.profileImage || ugRecord?.profileImage || null,
     dob:
       getDobValue(studentData) ||
