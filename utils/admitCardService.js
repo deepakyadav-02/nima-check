@@ -61,8 +61,14 @@ const ALL_PG2ND2025_FIELDS = ['CH-408', 'PAPER-2.1', 'MTC-201', 'PAPER-1.1'];
 
 const isBbaStudent = (student) => {
   const dept = String(student?.Department || '').trim().toUpperCase();
-  const roll = String(student?.['Roll No'] || '').trim().toUpperCase();
-  return dept === 'BBA' || dept === 'BBA ' || roll.startsWith('BBA-') || student?.Stream === 'BBA';
+  const roll = String(student?.['Roll No'] || student?.['Autonomous Roll No'] || '').trim().toUpperCase();
+  return (
+    dept === 'BBA' ||
+    dept === 'BBA ' ||
+    roll.startsWith('BBA-') ||
+    roll.includes('NACBBA') ||
+    student?.Stream === 'BBA'
+  );
 };
 
 const hasAnyField = (student, fields) =>
@@ -92,6 +98,16 @@ const SUBJECT_LAYOUTS = {
     'Multidisciplinary-2',
     'AEC-2',
     'SECC-I',
+  ],
+  // BBA 2nd Sem 2025 — field names as in 2025-2ndsem.json
+  '2ndsem2025-bba': [
+    'CC-201',
+    'CC-202',
+    'CC-203',
+    'Multi Disciplinary-201',
+    'AEC-201',
+    'SEC-201',
+    'VAC-201',
   ],
   '2ndsem2024-ug': [
     'Major-3',
@@ -159,6 +175,15 @@ const SUBJECT_FIELD_LABELS = {
     'Multidisciplinary-2': 'MDC-2',
     'AEC-2': 'AEC-2',
     'SECC-I': 'SEC-I',
+  },
+  '2ndsem2025-bba': {
+    'CC-201': 'CC-201',
+    'CC-202': 'CC-202',
+    'CC-203': 'CC-203',
+    'Multi Disciplinary-201': 'MDC-201',
+    'AEC-201': 'AEC-201',
+    'SEC-201': 'SEC-201',
+    'VAC-201': 'VAC-201',
   },
   '2ndsem2024-ug': {
     'Major-3': 'Major CP-3',
@@ -258,8 +283,10 @@ const SEMESTER_SOURCES = [
     batchCode: '25',
     studentType: 'UG2ND2025',
     fetch: (query) => UGSecondSem2025.findOne(query),
-    layoutKey: () => '2ndsem2025-ug',
-    detect: (student) => hasAnyField(student, SUBJECT_LAYOUTS['2ndsem2025-ug']),
+    layoutKey: (student) => (isBbaStudent(student) ? '2ndsem2025-bba' : '2ndsem2025-ug'),
+    detect: (student) =>
+      hasAnyField(student, SUBJECT_LAYOUTS['2ndsem2025-ug']) ||
+      hasAnyField(student, SUBJECT_LAYOUTS['2ndsem2025-bba']),
   },
   {
     key: '2ndsem2024',
